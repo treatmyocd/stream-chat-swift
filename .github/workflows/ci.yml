@@ -64,6 +64,8 @@ jobs:
       run: ./bootstrap.sh
     - name: Run v3 Tests (Debug)
       run: bundle exec fastlane test
+    - name: Run v3 UI Tests (Debug)
+      run: bundle exec fastlane test_ui device:"iPhone 12"
     - name: Post Codecov report
       run: bash <(curl -s https://codecov.io/bash) -t ${{ secrets.CODECOV_TOKEN }}
     - uses: 8398a7/action-slack@v3
