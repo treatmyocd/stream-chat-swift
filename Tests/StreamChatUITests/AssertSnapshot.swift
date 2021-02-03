@@ -34,7 +34,7 @@ func AssertSnapshot(
     variants.forEach { variant in
         assertSnapshot(
             matching: viewController,
-            as: .image(traits: variant.traits),
+            as: .image(size: CGSize(width: 360, height: 700), traits: variant.traits),
             named: variant.rawValue,
             record: record,
             file: file,
