@@ -91,6 +91,10 @@ end
 
 # Adds "CI=TRUE" environment variable to the provided test plan file
 def setCIEnvironmentVariable(testPlanFile)
+  if !ENV["IS_CI"]
+    return 
+  end
+  
   file = File.read(testPlanFile)
   data_hash = JSON.parse(file)
 
