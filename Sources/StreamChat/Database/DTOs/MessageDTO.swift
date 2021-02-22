@@ -324,11 +324,19 @@ extension NSManagedObjectContext: MessageDatabaseSession {
         
         let cid = cid ?? payload.channel!.cid
         
-        let attachments: Set<AttachmentDTO> = try Set(
-            payload.attachments.enumerated().map { index, attachment in
+        let attachments: Set<AttachmentDTO> = Set(
+            payload.attachments.enumerated().compactMap { index, attachment in
                 let id = AttachmentId(cid: cid, messageId: payload.id, index: index)
-                let dto = try saveAttachment(payload: attachment, id: id)
-                return dto
+                do {
+                    let dto = try saveAttachment(payload: attachment, id: id)
+                    return dto
+                } catch {
+                    log.assertationFailure(
+                        "Failed to save attachment: \(attachment). Please check saveAttachment function at " +
+                            "AttachmentDTO.swift"
+                    )
+                    return nil
+                }
             }
         )
         dto.attachments = attachments
