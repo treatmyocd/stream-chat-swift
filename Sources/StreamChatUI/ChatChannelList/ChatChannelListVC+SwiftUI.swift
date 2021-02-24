@@ -14,7 +14,7 @@ import UIKit
 /// A `UIViewControllerRepresentable` subclass which wraps `ChatChannelListVC`.
 public struct ChatChannelListItemVCComponent<ExtraData: ExtraDataTypes>: UIViewControllerRepresentable {
     /// The `ChatChannelListController` instance that provides channels data.
-    var controller: ChatChannelListController
+    let controller: ChatChannelListController
     
     public init(controller: ChatChannelListController) {
         self.controller = controller
