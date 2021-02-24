@@ -11,8 +11,10 @@ import StreamChat
 import UIKit
 
 @available(iOS 14.0, *)
+public typealias ChatChannelListComponent = ChatChannelListVCComponent<NoExtraData>
+
 /// A `UIViewControllerRepresentable` subclass which wraps `ChatChannelListVC`.
-public struct ChatChannelListItemVCComponent<ExtraData: ExtraDataTypes>: UIViewControllerRepresentable {
+public struct ChatChannelListVCComponent<ExtraData: ExtraDataTypes>: UIViewControllerRepresentable {
     /// The `ChatChannelListController` instance that provides channels data.
     let controller: ChatChannelListController
     

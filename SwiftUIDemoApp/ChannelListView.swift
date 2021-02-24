@@ -29,7 +29,10 @@ struct ChannelListView: View {
     }
 
     var body: some View {
-        ChatChannelListItemVCComponent<NoExtraData>(controller: channelListController)
+        NavigationView {
+            ChatChannelListComponent(controller: channelListController)
+                .navigationTitle("Chat List")
+        }
     }
 }
 
