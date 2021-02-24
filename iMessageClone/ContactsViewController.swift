@@ -34,6 +34,7 @@ final class ContactsViewController: ChatChannelListVC {
         title = "Messages"
         
         userAvatarView.isHidden = true
+        navigationItem.searchController = UISearchController()
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Edit", style: .plain, target: self, action: #selector(editButtonTapped))
         
