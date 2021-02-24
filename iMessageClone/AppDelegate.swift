@@ -13,6 +13,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {        
         UIConfig.default.channelList.channelListItemView = ContactListItemView.self
 
+        UIConfig.default.navigation.channelListRouter = iMessageChatChannelListRouter.self
         UIConfig.default.images.newChat = UIImage(systemName: "square.and.pencil")!
         
         window = UIWindow(frame: UIScreen.main.bounds)
