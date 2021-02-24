@@ -64,6 +64,7 @@
 		786AC22725E6815D00E5FD9C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 786AC22625E6815D00E5FD9C /* Assets.xcassets */; };
 		786AC22A25E6815D00E5FD9C /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 786AC22925E6815D00E5FD9C /* Preview Assets.xcassets */; };
 		786AC24B25E693D300E5FD9C /* DemoUsers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 786AC24A25E693D300E5FD9C /* DemoUsers.swift */; };
+		786AC28525E6A71500E5FD9C /* CustomChannelListItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 786AC28425E6A71400E5FD9C /* CustomChannelListItemView.swift */; };
 		7900452625374CA20096ECA1 /* User+SwiftUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7900452525374CA20096ECA1 /* User+SwiftUI.swift */; };
 		7908820625432B7200896F03 /* StreamChatUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 790881FD25432B7200896F03 /* StreamChatUI.framework */; };
 		7908821225432B7200896F03 /* StreamChatUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 790881FD25432B7200896F03 /* StreamChatUI.framework */; };
@@ -980,6 +981,7 @@
 		786AC22925E6815D00E5FD9C /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		786AC22B25E6815D00E5FD9C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		786AC24A25E693D300E5FD9C /* DemoUsers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoUsers.swift; sourceTree = "<group>"; };
+		786AC28425E6A71400E5FD9C /* CustomChannelListItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomChannelListItemView.swift; sourceTree = "<group>"; };
 		7900452525374CA20096ECA1 /* User+SwiftUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+SwiftUI.swift"; sourceTree = "<group>"; };
 		790881FD25432B7200896F03 /* StreamChatUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = StreamChatUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7908820525432B7200896F03 /* StreamChatUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StreamChatUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1847,6 +1849,7 @@
 			children = (
 				786AC22225E6815800E5FD9C /* SwiftUIDemoAppApp.swift */,
 				786AC22425E6815800E5FD9C /* ChannelListView.swift */,
+				786AC28425E6A71400E5FD9C /* CustomChannelListItemView.swift */,
 				786AC22625E6815D00E5FD9C /* Assets.xcassets */,
 				786AC22B25E6815D00E5FD9C /* Info.plist */,
 				786AC22825E6815D00E5FD9C /* Preview Content */,
@@ -4217,6 +4220,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				786AC28525E6A71500E5FD9C /* CustomChannelListItemView.swift in Sources */,
 				786AC22525E6815800E5FD9C /* ChannelListView.swift in Sources */,
 				786AC24B25E693D300E5FD9C /* DemoUsers.swift in Sources */,
 				786AC22325E6815800E5FD9C /* SwiftUIDemoAppApp.swift in Sources */,

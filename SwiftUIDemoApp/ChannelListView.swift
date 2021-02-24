@@ -13,6 +13,8 @@ import StreamChatUI
 struct ChannelListView: View {
     var channelListController: _ChatChannelListController<NoExtraData>
 
+    // MARK: - Initialization
+
     init() {
         // Use first demo user for a showcase
         let userCredentials = UserCredentials.builtInUsers[0]
@@ -26,13 +28,25 @@ struct ChannelListView: View {
 
         // Create controller
         channelListController = client.channelListController(query: .init(filter: .containMembers(userIds: [userCredentials.id])))
+
+        // Setup custom config
+        setupConfig()
     }
+
+    // MARK: - Body
 
     var body: some View {
         NavigationView {
             ChatChannelListComponent(controller: channelListController)
                 .navigationTitle("Chat List")
         }
+    }
+
+    // MARK: Private helpers
+
+    /// Helper to set custom values of `UIConfig`
+    private func setupConfig() {
+        UIConfig.default.channelList.channelListItemView = CustomChannelListItemView.self
     }
 }
 
