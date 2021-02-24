@@ -799,6 +799,7 @@
 		F6FF1DA624FD17B400151735 /* MessageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6FF1DA524FD17B400151735 /* MessageController.swift */; };
 		F6FF1DA824FD232C00151735 /* MessageUpdater.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6FF1DA724FD232C00151735 /* MessageUpdater.swift */; };
 		F6FF1DAA24FD23D300151735 /* MessageEndpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6FF1DA924FD23D300151735 /* MessageEndpoints.swift */; };
+		F86D799325E659BB00379BC3 /* ChatChannelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F86D799225E659BA00379BC3 /* ChatChannelViewController.swift */; };
 		F89C23A925E508DE0082CA5B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89C23A825E508DE0082CA5B /* AppDelegate.swift */; };
 		F89C23AD25E508DE0082CA5B /* ContactsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89C23AC25E508DE0082CA5B /* ContactsViewController.swift */; };
 		F89C23B225E508E20082CA5B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F89C23B125E508E20082CA5B /* Assets.xcassets */; };
@@ -1728,6 +1729,7 @@
 		F6FF1DA524FD17B400151735 /* MessageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageController.swift; sourceTree = "<group>"; };
 		F6FF1DA724FD232C00151735 /* MessageUpdater.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageUpdater.swift; sourceTree = "<group>"; };
 		F6FF1DA924FD23D300151735 /* MessageEndpoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageEndpoints.swift; sourceTree = "<group>"; };
+		F86D799225E659BA00379BC3 /* ChatChannelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatChannelViewController.swift; sourceTree = "<group>"; };
 		F89C23A625E508DE0082CA5B /* iMessageClone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iMessageClone.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F89C23A825E508DE0082CA5B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F89C23AC25E508DE0082CA5B /* ContactsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsViewController.swift; sourceTree = "<group>"; };
@@ -3637,6 +3639,7 @@
 				F89C23A825E508DE0082CA5B /* AppDelegate.swift */,
 				F8AADE3B25E53DF9005E8528 /* ContactListItemView.swift */,
 				F89C23AC25E508DE0082CA5B /* ContactsViewController.swift */,
+				F86D799225E659BA00379BC3 /* ChatChannelViewController.swift */,
 				F89C23B125E508E20082CA5B /* Assets.xcassets */,
 				F89C23B325E508E20082CA5B /* LaunchScreen.storyboard */,
 				F89C23B625E508E20082CA5B /* Info.plist */,
@@ -4975,6 +4978,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F86D799325E659BB00379BC3 /* ChatChannelViewController.swift in Sources */,
 				F8AADE3C25E53DFA005E8528 /* ContactListItemView.swift in Sources */,
 				F89C23AD25E508DE0082CA5B /* ContactsViewController.swift in Sources */,
 				F89C23A925E508DE0082CA5B /* AppDelegate.swift in Sources */,
