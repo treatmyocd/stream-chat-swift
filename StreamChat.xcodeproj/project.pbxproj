@@ -65,6 +65,7 @@
 		786AC22A25E6815D00E5FD9C /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 786AC22925E6815D00E5FD9C /* Preview Assets.xcassets */; };
 		786AC24B25E693D300E5FD9C /* DemoUsers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 786AC24A25E693D300E5FD9C /* DemoUsers.swift */; };
 		786AC28525E6A71500E5FD9C /* CustomChannelListItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 786AC28425E6A71400E5FD9C /* CustomChannelListItemView.swift */; };
+		786AC2AA25E7FEDC00E5FD9C /* ChatChannelListItemView+SwiftUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 786AC2A025E7FED400E5FD9C /* ChatChannelListItemView+SwiftUI.swift */; };
 		7900452625374CA20096ECA1 /* User+SwiftUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7900452525374CA20096ECA1 /* User+SwiftUI.swift */; };
 		7908820625432B7200896F03 /* StreamChatUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 790881FD25432B7200896F03 /* StreamChatUI.framework */; };
 		7908821225432B7200896F03 /* StreamChatUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 790881FD25432B7200896F03 /* StreamChatUI.framework */; };
@@ -808,6 +809,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		786AC29625E7941200E5FD9C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8AD5EC8622E9A3E8005CFAC9 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 790881FC25432B7200896F03;
+			remoteInfo = StreamChatUI;
+		};
 		790881AE2543282200896F03 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 8AD5EC8622E9A3E8005CFAC9 /* Project object */;
@@ -982,6 +990,7 @@
 		786AC22B25E6815D00E5FD9C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		786AC24A25E693D300E5FD9C /* DemoUsers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoUsers.swift; sourceTree = "<group>"; };
 		786AC28425E6A71400E5FD9C /* CustomChannelListItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomChannelListItemView.swift; sourceTree = "<group>"; };
+		786AC2A025E7FED400E5FD9C /* ChatChannelListItemView+SwiftUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ChatChannelListItemView+SwiftUI.swift"; sourceTree = "<group>"; };
 		7900452525374CA20096ECA1 /* User+SwiftUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+SwiftUI.swift"; sourceTree = "<group>"; };
 		790881FD25432B7200896F03 /* StreamChatUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = StreamChatUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7908820525432B7200896F03 /* StreamChatUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StreamChatUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1956,6 +1965,7 @@
 				88BD82AF2549D18F00369074 /* ChatChannelListItemView.swift */,
 				225504BE25DE9EB700A5A65A /* ChatChannelListItemView_Tests.swift */,
 				E7C4E74C259D54B5002889AC /* ChatChannelSwipeableListItemView.swift */,
+				786AC2A025E7FED400E5FD9C /* ChatChannelListItemView+SwiftUI.swift */,
 				227299BB25DBFE0C005EAFCF /* ChatChannelSwipeableListItemView_Tests.swift */,
 				2245B2B525602465006A612D /* ChatChannelAvatarView.swift */,
 				E791E4D525D3E2DA00B0E076 /* ChatChannelAvatarView_Tests.swift */,
@@ -3692,6 +3702,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				786AC29725E7941200E5FD9C /* PBXTargetDependency */,
 			);
 			name = SwiftUIDemoApp;
 			productName = SwiftUIDemoApp;
@@ -4308,6 +4319,7 @@
 				E79AC10B25831A1500C3CE5D /* ChatMessageComposerCommandCollectionViewCell.swift in Sources */,
 				88CABC1525933DD80061BB67 /* ChatMessageReactionsView+ItemView.swift in Sources */,
 				224FF6812562F2E900725DD1 /* ChatChannelUnreadCountView.swift in Sources */,
+				786AC2AA25E7FEDC00E5FD9C /* ChatChannelListItemView+SwiftUI.swift in Sources */,
 				E7DF7E2425C2C67E00AE9D21 /* ChatAvatarView.swift in Sources */,
 				224FF67B2562F1EA00725DD1 /* ChatChannelReadStatusCheckmarkView.swift in Sources */,
 				DB70CFFB25702EB900DDF436 /* ChatMessagePopupVC.swift in Sources */,
@@ -4984,6 +4996,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		786AC29725E7941200E5FD9C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 790881FC25432B7200896F03 /* StreamChatUI */;
+			targetProxy = 786AC29625E7941200E5FD9C /* PBXContainerItemProxy */;
+		};
 		790881AF2543282200896F03 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 799C941A247D2F80001F1104 /* StreamChat */;
