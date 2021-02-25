@@ -8,14 +8,33 @@ import UIKit
 /// A `ChatChannelSwipeableListItemView` subclass view that shows channel information.
 public typealias ChatChannelListItemView = _ChatChannelListItemView<NoExtraData>
 
-/// A `ChatChannelSwipeableListItemView` subclass view that shows channel information.
-open class _ChatChannelListItemView<ExtraData: ExtraDataTypes>: _ChatChannelSwipeableListItemView<ExtraData> {
-    
+/// Base class of `ChatChannelListItemView`.
+open class _ChatChannelListItemViewBase<ExtraData: ExtraDataTypes>: _ChatChannelSwipeableListItemView<ExtraData> {
     /// The data this view component shows.
     public var content: (channel: _ChatChannel<ExtraData>?, currentUserId: UserId?) {
         didSet { updateContentIfNeeded() }
     }
-        
+    
+    var typingMemberString: String? {
+        guard let members = content.channel?.currentlyTypingMembers, !members.isEmpty else { return nil }
+        let names = members.compactMap(\.name).sorted()
+        return names.joined(separator: ", ") + " \(names.count == 1 ? "is" : "are") typing..."
+    }
+    
+    var typingMemberOrLastMessageString: String? {
+        guard let channel = content.channel else { return nil }
+        if let typingMembersInfo = typingMemberString {
+            return typingMembersInfo
+        } else if let latestMessage = channel.latestMessages.first {
+            return "\(latestMessage.author.name ?? latestMessage.author.id): \(latestMessage.text)"
+        } else {
+            return "No messages"
+        }
+    }
+}
+
+/// A  `ChatChannelSwipeableListItemView` subclass view that shows channel information.
+open class _ChatChannelListItemView<ExtraData: ExtraDataTypes>: _ChatChannelListItemViewBase<ExtraData> {
     private lazy var uiConfigSubviews: _UIConfig.ChannelListItemSubviews = uiConfig.channelList.channelListItemSubviews
     
     /// The `UILabel` instance showing the channel name.
@@ -182,24 +201,5 @@ open class _ChatChannelListItemView<ExtraData: ExtraDataTypes>: _ChatChannelSwip
         unreadCountView.invalidateIntrinsicContentSize()
                 
         timestampLabel.text = content.channel?.lastMessageAt?.getFormattedDate(format: "hh:mm a")
-    }
-}
-
-extension _ChatChannelListItemView {
-    var typingMemberString: String? {
-        guard let members = content.channel?.currentlyTypingMembers, !members.isEmpty else { return nil }
-        let names = members.compactMap(\.name).sorted()
-        return names.joined(separator: ", ") + " \(names.count == 1 ? "is" : "are") typing..."
-    }
-    
-    var typingMemberOrLastMessageString: String? {
-        guard let channel = content.channel else { return nil }
-        if let typingMembersInfo = typingMemberString {
-            return typingMembersInfo
-        } else if let latestMessage = channel.latestMessages.first {
-            return "\(latestMessage.author.name ?? latestMessage.author.id): \(latestMessage.text)"
-        } else {
-            return "No messages"
-        }
     }
 }
