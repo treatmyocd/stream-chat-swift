@@ -46,7 +46,7 @@ struct ChannelListView: View {
 
     /// Helper to set custom values of `UIConfig`
     private func setupConfig() {
-        UIConfig.default.channelList.channelListItemView = _ChatChannelListItemView_SwiftUI<CustomChannelListItemView, NoExtraData>.self
+        UIConfig.default.channelList.channelListItemView(CustomChannelListItemView.self)
     }
 }
 
