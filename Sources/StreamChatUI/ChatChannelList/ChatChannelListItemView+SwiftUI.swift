@@ -11,6 +11,8 @@ import SwiftUI
 
 /// Protocol which wraps `_ChatChannelListItemView` for usage in SwiftUI.
 public protocol ChatChannelListItemViewSwiftUI: View {
+    associatedtype ExtraData: ExtraDataTypes
+
     init()
 }
 
@@ -20,6 +22,11 @@ public protocol ChatChannelListItemViewSwiftUIView: ChatChannelListItemViewSwift
     var subtitle: String { get set }
     var avatarImage: UIImage { get set }
     var timestamp: String { get set }
+
+    var user: _ChatUser<ExtraData.User>? { get set }
+    var message: _ChatMessage<ExtraData>? { get set }
+    var channel: _ChatChannel<ExtraData>? { get set }
+    var messageReaction: _ChatMessageReaction<ExtraData>? { get set }
 }
 
 @available(iOS 14, *)
