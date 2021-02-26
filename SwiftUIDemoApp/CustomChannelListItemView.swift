@@ -12,13 +12,23 @@ import SwiftUI
 
 @available(iOS 14, *)
 public struct CustomChannelListItemView: ChatChannelListItemViewSwiftUIView {
+    // End user can change this typealias to his own custom extra data type
+    public typealias ExtraData = NoExtraData
+
+    // MARK: - Public properties
+
     public var title: String = ""
     public var subtitle: String = ""
     public var timestamp: String = ""
     public var avatarImage: UIImage = UIImage(systemName: "person")!
-    
+
+    public var user: _ChatUser<ExtraData.User>?
+    public var message: _ChatMessage<ExtraData.Message>?
+    public var channel: _ChatChannel<ExtraData.Channel>?
+    public var messageReaction: _ChatMessageReaction<ExtraData.MessageReaction>?
+
     public init() { }
-    
+
     public var body: some View {
         HStack(spacing: 10) {
             Image(uiImage: avatarImage)
