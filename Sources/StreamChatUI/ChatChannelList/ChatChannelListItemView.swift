@@ -14,7 +14,7 @@ open class _ChatChannelListItemViewBase<ExtraData: ExtraDataTypes>: _ChatChannel
     public var content: (channel: _ChatChannel<ExtraData>?, currentUserId: UserId?) {
         didSet { updateContentIfNeeded() }
     }
-    
+
     var typingMemberString: String? {
         guard let members = content.channel?.currentlyTypingMembers, !members.isEmpty else { return nil }
         let names = members.compactMap(\.name).sorted()
