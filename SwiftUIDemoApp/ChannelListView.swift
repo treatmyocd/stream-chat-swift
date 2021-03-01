@@ -32,8 +32,8 @@ struct ChannelListView: View {
         channelListController = client.channelListController(query: .init(filter: .containMembers(userIds: [userCredentials.id])))
 
         // Setup custom config
-        uiConfig.channelList.channelListItemView =
-            _ChatChannelListItemView_SwiftUI<CustomChannelListItemView, NoExtraData>.self
+        StreamChatUI.UIConfig.default.channelList.channelListItemView =
+            ChatChannelListItemView.SwiftUI<CustomChannelListItemView, NoExtraData>.self
     }
 
     // MARK: - Body
