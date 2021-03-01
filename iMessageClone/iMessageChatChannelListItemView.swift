@@ -7,7 +7,6 @@ import StreamChatUI
 
 final class iMessageChatChannelListItemView: ChatChannelListItemView {
     private lazy var unreadView = UIView()
-    private lazy var _timestampLabel = UILabel()
     
     override func setUpAppearance() {
         super.setUpAppearance()
@@ -16,10 +15,9 @@ final class iMessageChatChannelListItemView: ChatChannelListItemView {
         unreadView.layer.masksToBounds = true
         unreadView.layer.cornerRadius = 5
         unreadView.clipsToBounds = true
-        
-        timestampLabel.isHidden = true
-        _timestampLabel.font = .systemFont(ofSize: 15)
-        _timestampLabel.textColor = .gray
+
+        timestampLabel.font = .systemFont(ofSize: 15)
+        timestampLabel.textColor = .gray
         
         subtitleLabel.numberOfLines = 2
     }
@@ -30,11 +28,18 @@ final class iMessageChatChannelListItemView: ChatChannelListItemView {
         unreadView.translatesAutoresizingMaskIntoConstraints = false
         cellContentView.addSubview(unreadView)
         NSLayoutConstraint.activate([
-            unreadView.centerYAnchor.constraint(equalTo: cellContentView.centerYAnchor),
-            unreadView.leadingAnchor.constraint(equalTo: cellContentView.leadingAnchor, constant: 5),
-            unreadView.heightAnchor.constraint(equalToConstant: 10),
-            unreadView.widthAnchor.constraint(equalTo: unreadView.heightAnchor),
+//            unreadView.centerYAnchor.constraint(equalTo: cellContentView.centerYAnchor),
+//            unreadView.leadingAnchor.constraint(equalTo: cellContentView.leadingAnchor, constant: 5),
+//            unreadView.heightAnchor.constraint(equalToConstant: 10),
+//            unreadView.widthAnchor.constraint(equalTo: unreadView.heightAnchor),
+            unreadCountView.centerYAnchor.constraint(equalTo: cellContentView.centerYAnchor),
+            unreadCountView.leadingAnchor.constraint(equalTo: cellContentView.leadingAnchor, constant: 5),
+//            unreadCountView.heightAnchor.constraint(equalToConstant: 10),
+            unreadCountView.widthAnchor.constraint(equalTo: unreadView.heightAnchor),
         ])
+        layout.unreadCountViewConstraints.forEach { $0.isActive = false }
+        
+        layout.timestampLabelConstraints.forEach { $0.isActive = false }
         
         let timestampStackView = UIStackView()
         timestampStackView.spacing = 14
@@ -42,16 +47,18 @@ final class iMessageChatChannelListItemView: ChatChannelListItemView {
         timestampStackView.translatesAutoresizingMaskIntoConstraints = false
         cellContentView.addSubview(timestampStackView)
         NSLayoutConstraint.activate([
-            timestampStackView.topAnchor.constraint(equalTo: cellContentView.topAnchor, constant: 9),
             timestampStackView.leadingAnchor.constraint(equalTo: avatarView.trailingAnchor, constant: 12),
             timestampStackView.trailingAnchor.constraint(equalTo: cellContentView.trailingAnchor, constant: -20),
         ])
 
         timestampStackView.addArrangedSubview(titleLabel)
-        
-        _timestampLabel.translatesAutoresizingMaskIntoConstraints = false
-        _timestampLabel.setContentCompressionResistancePriority(.required, for: .horizontal)
-        timestampStackView.addArrangedSubview(_timestampLabel)
+        timestampLabel.setContentHuggingPriority(.required, for: .vertical)
+        timestampLabel.translatesAutoresizingMaskIntoConstraints = false
+        timestampLabel.setContentCompressionResistancePriority(.required, for: .horizontal)
+        timestampStackView.addArrangedSubview(timestampLabel)
+        NSLayoutConstraint.activate([
+            timestampLabel.topAnchor.constraint(equalTo: cellContentView.topAnchor, constant: 6),
+        ])
         
         let timestampAccessoryView = UIImageView(
             image: UIImage(
@@ -67,7 +74,7 @@ final class iMessageChatChannelListItemView: ChatChannelListItemView {
         timestampAccessoryView.setContentHuggingPriority(.required, for: .horizontal)
         timestampStackView.addArrangedSubview(timestampAccessoryView)
         NSLayoutConstraint.activate([
-            timestampAccessoryView.heightAnchor.constraint(equalTo: _timestampLabel.heightAnchor, constant: -6),
+            timestampAccessoryView.heightAnchor.constraint(equalTo: timestampLabel.heightAnchor, constant: -6),
         ])
         
         titleLabel.setContentHuggingPriority(.defaultLow, for: .horizontal)
@@ -92,9 +99,9 @@ final class iMessageChatChannelListItemView: ChatChannelListItemView {
         super.updateContent()
 
         unreadView.isHidden = unreadCountView.isHidden
-        unreadCountView.isHidden = true
+//        unreadCountView.isHidden = true
 
-        _timestampLabel.text = content.channel?.lastMessageAt?.formatRelativeString() ?? ""
+        timestampLabel.text = content.channel?.lastMessageAt?.formatRelativeString() ?? ""
     }
 }
 

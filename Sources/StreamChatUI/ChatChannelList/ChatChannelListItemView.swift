@@ -15,6 +15,14 @@ open class _ChatChannelListItemView<ExtraData: ExtraDataTypes>: _ChatChannelSwip
     public var content: (channel: _ChatChannel<ExtraData>?, currentUserId: UserId?) {
         didSet { updateContentIfNeeded() }
     }
+    
+    public struct Layout {
+        public fileprivate(set) var timestampLabelConstraints: [NSLayoutConstraint] = []
+        public fileprivate(set) var avatarViewConstraints: [NSLayoutConstraint] = []
+        public fileprivate(set) var titleLabelConstraints: [NSLayoutConstraint] = []
+        public fileprivate(set) var subtitleLabelConstraints: [NSLayoutConstraint] = []
+        public fileprivate(set) var unreadCountViewConstraints: [NSLayoutConstraint] = []
+    }
         
     private lazy var uiConfigSubviews: _UIConfig.ChannelListItemSubviews = uiConfig.channelList.channelListItemSubviews
     
@@ -43,6 +51,8 @@ open class _ChatChannelListItemView<ExtraData: ExtraDataTypes>: _ChatChannelSwip
     open private(set) lazy var unreadCountView: _ChatChannelUnreadCountView<ExtraData> = uiConfigSubviews
         .unreadCountView.init()
         .withoutAutoresizingMaskConstraints
+    
+    public private(set) var layout = Layout()
 
     /*
         TODO: ReadStatusView, Missing LLC API
@@ -92,7 +102,7 @@ open class _ChatChannelListItemView<ExtraData: ExtraDataTypes>: _ChatChannelSwip
         ]
         
         // Avatar view
-        constraintsToActivate += [
+        layout.avatarViewConstraints += [
             // Default avatar view size
             avatarView.heightAnchor.pin(equalToConstant: 48),
             
@@ -111,7 +121,7 @@ open class _ChatChannelListItemView<ExtraData: ExtraDataTypes>: _ChatChannelSwip
         ]
         
         // Title label
-        constraintsToActivate += [
+        layout.titleLabelConstraints += [
             // Bottom of the label is aligned with avatar vertical center
             titleLabel.lastBaselineAnchor.pin(equalTo: visualCenterGuide.topAnchor),
 
@@ -123,7 +133,7 @@ open class _ChatChannelListItemView<ExtraData: ExtraDataTypes>: _ChatChannelSwip
         ]
 
         // Subtitle label
-        constraintsToActivate += [
+        layout.subtitleLabelConstraints += [
             // Top of the label is aligned with avatar vertical center
             subtitleLabel.topAnchor.pin(equalTo: visualCenterGuide.bottomAnchor),
             
@@ -132,7 +142,7 @@ open class _ChatChannelListItemView<ExtraData: ExtraDataTypes>: _ChatChannelSwip
         ]
 
         // Unread count view
-        constraintsToActivate += [
+        layout.unreadCountViewConstraints += [
             // Pin the label to the trailing anchor
             unreadCountView.trailingAnchor.pin(equalTo: cellContentView.layoutMarginsGuide.trailingAnchor),
             
@@ -148,7 +158,7 @@ open class _ChatChannelListItemView<ExtraData: ExtraDataTypes>: _ChatChannelSwip
         unreadCountView.setContentCompressionResistancePriority(.streamRequire, for: .horizontal)
 
         // Timestamp label
-        constraintsToActivate += [
+        layout.timestampLabelConstraints = [
             // Pin the label to the trailing anchor
             timestampLabel.trailingAnchor.pin(equalTo: cellContentView.layoutMarginsGuide.trailingAnchor),
             
@@ -163,7 +173,14 @@ open class _ChatChannelListItemView<ExtraData: ExtraDataTypes>: _ChatChannelSwip
         subtitleLabel.setContentCompressionResistancePriority(.streamLow, for: .horizontal)
         timestampLabel.setContentCompressionResistancePriority(.streamRequire, for: .horizontal)
 
-        NSLayoutConstraint.activate(constraintsToActivate)
+        NSLayoutConstraint.activate(
+            constraintsToActivate
+                + layout.avatarViewConstraints
+                + layout.timestampLabelConstraints
+                + layout.titleLabelConstraints
+                + layout.subtitleLabelConstraints
+                + layout.unreadCountViewConstraints
+        )
     }
     
     override open func updateContent() {
