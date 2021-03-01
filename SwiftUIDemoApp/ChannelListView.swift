@@ -13,6 +13,8 @@ import StreamChatUI
 struct ChannelListView: View {
     var channelListController: _ChatChannelListController<NoExtraData>
 
+    @EnvironmentObject var uiConfig: UIConfig
+
     // MARK: - Initialization
 
     init() {
@@ -30,7 +32,8 @@ struct ChannelListView: View {
         channelListController = client.channelListController(query: .init(filter: .containMembers(userIds: [userCredentials.id])))
 
         // Setup custom config
-        setupConfig()
+        uiConfig.channelList.channelListItemView =
+            _ChatChannelListItemView_SwiftUI<CustomChannelListItemView, NoExtraData>.self
     }
 
     // MARK: - Body
@@ -40,13 +43,6 @@ struct ChannelListView: View {
             ChatChannelListComponent(controller: channelListController)
                 .navigationTitle("Chat List")
         }
-    }
-
-    // MARK: Private helpers
-
-    /// Helper to set custom values of `UIConfig`
-    private func setupConfig() {
-        UIConfig.default.channelList.channelListItemView(CustomChannelListItemView.self)
     }
 }
 

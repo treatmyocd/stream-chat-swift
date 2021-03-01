@@ -11,45 +11,49 @@ import StreamChatUI
 import SwiftUI
 
 @available(iOS 14, *)
-public struct CustomChannelListItemView: ChatChannelListItemViewSwiftUIView {
-    // End user can change this typealias to his own custom extra data type
-    public typealias ExtraData = NoExtraData
+public struct CustomChannelListItemView: ChatChannelListItemViewSwiftUI_ {
 
-    // MARK: - Public properties
+    @EnvironmentObject var uiConfig: UIConfig
+    @ObservedObject var dataSource: _ChatChannelListItemView_DataSource<NoExtraData>
 
-    public var title: String = ""
-    public var subtitle: String = ""
-    public var timestamp: String = ""
-    public var avatarImage: UIImage = UIImage(systemName: "person")!
+    public init(dataSource: _ChatChannelListItemView_DataSource<NoExtraData>) {
+        self.dataSource = dataSource
+    }
 
-    public var user: _ChatUser<ExtraData.User>?
-    public var message: _ChatMessage<ExtraData.Message>?
-    public var channel: _ChatChannel<ExtraData.Channel>?
-    public var messageReaction: _ChatMessageReaction<ExtraData.MessageReaction>?
+    private var channelName: String? {
+        guard let channel = dataSource.channel, let currentUserId = dataSource.currentUserId
+        else { return nil }
 
-    public init() { }
+        let namer = uiConfig.channelList.channelNamer.init()
+        return namer.name(for: channel, as: currentUserId)
+    }
 
     public var body: some View {
         HStack(spacing: 10) {
-            Image(uiImage: avatarImage)
-                .padding(10)
-                .background(Color.gray.opacity(0.2))
-                .cornerRadius(20)
+//            Image(uiImage: dataSource.channel!.cachedMembers.first!.imageURL)
+//                .padding(10)
+//                .background(Color.gray.opacity(0.2))
+//                .cornerRadius(20)
             VStack(alignment: .leading) {
-                Text(title)
+                Text(channelName!)
                     .fontWeight(.medium)
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .offset(x: 10)
-                Text(subtitle)
+                Text(dataSource.channel?.lastMessageAt?.getFormattedDate(format: "hh:mm a") ?? "")
                     .font(.caption)
                     .foregroundColor(.gray)
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .offset(x: 10)
             }
-            Text(timestamp)
-                .font(.caption)
-                .foregroundColor(.gray)
         }
         .padding(EdgeInsets(top: 10, leading: 20, bottom: 10, trailing: 20))
+    }
+}
+
+extension Date {
+    func getFormattedDate(format: String) -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = format
+        return formatter.string(from: self)
     }
 }

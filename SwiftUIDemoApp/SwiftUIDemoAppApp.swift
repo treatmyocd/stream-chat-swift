@@ -7,12 +7,23 @@
 //
 
 import SwiftUI
+import StreamChatUI
 
 @main
 struct SwiftUIDemoAppApp: App {
     var body: some Scene {
         WindowGroup {
-            ChannelListView()
+            ChannelListView().environmentObject(UIConfig())
         }
+    }
+}
+
+// WIP - UIConfig is a struct but SwiftUI requires it to be a class.
+
+@dynamicMemberLookup
+class UIConfig: ObservableObject {
+    subscript<T>(dynamicMember keyPath: WritableKeyPath<StreamChatUI.UIConfig, T>) -> T {
+        get { StreamChatUI.UIConfig.default[keyPath: keyPath] }
+        set { StreamChatUI.UIConfig.default[keyPath: keyPath] = newValue }
     }
 }

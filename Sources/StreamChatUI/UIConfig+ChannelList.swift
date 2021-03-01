@@ -19,11 +19,6 @@ public extension _UIConfig {
         public var newChannelButton: UIButton.Type = _ChatChannelCreateNewButton<ExtraData>.self
         public var channelNamer: ChatChannelNamer.Type = ChatChannelNamer.self
         public var channelListItemSubviews = ChannelListItemSubviews()
-        
-        @available(iOS 14.0, *)
-        public mutating func channelListItemView<Content: ChatChannelListItemViewSwiftUIView>(_ content: Content.Type) {
-            channelListItemView = _ChatChannelListItemView_SwiftUI<Content, ExtraData>.self
-        }
     }
     
     struct ChannelListItemSubviews {
