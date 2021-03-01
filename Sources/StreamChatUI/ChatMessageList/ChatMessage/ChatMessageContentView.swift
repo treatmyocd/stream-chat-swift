@@ -118,7 +118,6 @@ open class _ChatMessageContentView<ExtraData: ExtraDataTypes>: _View, UIConfigPr
             
             reactionsBubble.topAnchor.pin(equalTo: topAnchor),
             
-            messageBubbleView.trailingAnchor.pin(equalTo: trailingAnchor).almostRequired,
             messageBubbleView.topAnchor.pin(equalTo: topAnchor).with(priority: .defaultHigh),
             messageBubbleView.bottomAnchor.pin(equalTo: bottomAnchor).with(priority: .defaultHigh),
             
@@ -153,6 +152,7 @@ open class _ChatMessageContentView<ExtraData: ExtraDataTypes>: _View, UIConfigPr
                 equalToSystemSpacingAfter: authorAvatarView.trailingAnchor,
                 multiplier: 1
             ),
+            messageBubbleView.trailingAnchor.pin(lessThanOrEqualTo: trailingAnchor),
             threadArrowView.leadingAnchor.pin(equalTo: messageBubbleView.leadingAnchor),
             threadView.leadingAnchor.pin(equalTo: threadArrowView.trailingAnchor)
         ]
@@ -162,7 +162,8 @@ open class _ChatMessageContentView<ExtraData: ExtraDataTypes>: _View, UIConfigPr
             reactionsBubble.tailTrailingAnchor.pin(equalTo: messageBubbleView.leadingAnchor, constant: 5),
             
             messageMetadataView.trailingAnchor.pin(equalTo: messageBubbleView.trailingAnchor).with(priority: .defaultHigh),
-            messageBubbleView.leadingAnchor.pin(equalTo: leadingAnchor),
+            messageBubbleView.trailingAnchor.pin(equalTo: trailingAnchor),
+            messageBubbleView.leadingAnchor.pin(greaterThanOrEqualTo: leadingAnchor),
             threadArrowView.trailingAnchor.pin(equalTo: messageBubbleView.trailingAnchor),
             threadView.trailingAnchor.pin(equalTo: threadArrowView.leadingAnchor)
         ]
