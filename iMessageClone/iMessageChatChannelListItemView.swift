@@ -5,7 +5,7 @@
 import UIKit
 import StreamChatUI
 
-final class ContactListItemView: ChatChannelListItemView {
+final class iMessageChatChannelListItemView: ChatChannelListItemView {
     private lazy var unreadView = UIView()
     private lazy var _timestampLabel = UILabel()
     

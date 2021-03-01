@@ -11,7 +11,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {        
-        UIConfig.default.channelList.channelListItemView = ContactListItemView.self
+        UIConfig.default.channelList.channelListItemView = iMessageChatChannelListItemView.self
 
         UIConfig.default.navigation.channelListRouter = iMessageChatChannelListRouter.self
         UIConfig.default.images.newChat = UIImage(systemName: "square.and.pencil")!
@@ -24,7 +24,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.makeKeyAndVisible()
         window?.rootViewController = UINavigationController(
-            rootViewController: ContactsViewController()
+            rootViewController: iMessageChatChannelListViewController()
         )
 
         return true

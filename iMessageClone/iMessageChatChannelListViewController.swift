@@ -6,7 +6,7 @@ import UIKit
 import StreamChat
 import StreamChatUI
 
-final class ContactsViewController: ChatChannelListVC {
+final class iMessageChatChannelListViewController: ChatChannelListVC {
     init() {
         super.init(nibName: nil, bundle: nil)
         
