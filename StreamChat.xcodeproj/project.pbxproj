@@ -799,6 +799,8 @@
 		F6FF1DA624FD17B400151735 /* MessageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6FF1DA524FD17B400151735 /* MessageController.swift */; };
 		F6FF1DA824FD232C00151735 /* MessageUpdater.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6FF1DA724FD232C00151735 /* MessageUpdater.swift */; };
 		F6FF1DAA24FD23D300151735 /* MessageEndpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6FF1DA924FD23D300151735 /* MessageEndpoints.swift */; };
+		F81641B325E7A36F00F49800 /* iMessageChatMessageContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81641B225E7A36E00F49800 /* iMessageChatMessageContentView.swift */; };
+		F81641BD25E7AEBC00F49800 /* iMessageСhatOutgoingMessageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81641BC25E7AEBC00F49800 /* iMessageСhatOutgoingMessageCollectionViewCell.swift */; };
 		F86D799325E659BB00379BC3 /* iMessageChatChannelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F86D799225E659BA00379BC3 /* iMessageChatChannelViewController.swift */; };
 		F89C23A925E508DE0082CA5B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89C23A825E508DE0082CA5B /* AppDelegate.swift */; };
 		F89C23AD25E508DE0082CA5B /* ContactsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89C23AC25E508DE0082CA5B /* ContactsViewController.swift */; };
@@ -1731,6 +1733,8 @@
 		F6FF1DA524FD17B400151735 /* MessageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageController.swift; sourceTree = "<group>"; };
 		F6FF1DA724FD232C00151735 /* MessageUpdater.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageUpdater.swift; sourceTree = "<group>"; };
 		F6FF1DA924FD23D300151735 /* MessageEndpoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageEndpoints.swift; sourceTree = "<group>"; };
+		F81641B225E7A36E00F49800 /* iMessageChatMessageContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iMessageChatMessageContentView.swift; sourceTree = "<group>"; };
+		F81641BC25E7AEBC00F49800 /* iMessageСhatOutgoingMessageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "iMessageСhatOutgoingMessageCollectionViewCell.swift"; sourceTree = "<group>"; };
 		F86D799225E659BA00379BC3 /* iMessageChatChannelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iMessageChatChannelViewController.swift; sourceTree = "<group>"; };
 		F89C23A625E508DE0082CA5B /* iMessageClone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iMessageClone.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F89C23A825E508DE0082CA5B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -3644,6 +3648,8 @@
 				F8AADE3B25E53DF9005E8528 /* ContactListItemView.swift */,
 				F89C23AC25E508DE0082CA5B /* ContactsViewController.swift */,
 				F86D799225E659BA00379BC3 /* iMessageChatChannelViewController.swift */,
+				F81641BC25E7AEBC00F49800 /* iMessageСhatOutgoingMessageCollectionViewCell.swift */,
+				F81641B225E7A36E00F49800 /* iMessageChatMessageContentView.swift */,
 				F8BA4F9125E694F90078BA9D /* iMessageChatMessageComposerView.swift */,
 				F8BA4FA325E69D8F0078BA9D /* iMessageChatComposerViewController.swift */,
 				F89C23B125E508E20082CA5B /* Assets.xcassets */,
@@ -4986,9 +4992,11 @@
 			files = (
 				F8BA4FA425E69D8F0078BA9D /* iMessageChatComposerViewController.swift in Sources */,
 				F86D799325E659BB00379BC3 /* iMessageChatChannelViewController.swift in Sources */,
+				F81641BD25E7AEBC00F49800 /* iMessageСhatOutgoingMessageCollectionViewCell.swift in Sources */,
 				F8AADE3C25E53DFA005E8528 /* ContactListItemView.swift in Sources */,
 				F8BA4F9225E694F90078BA9D /* iMessageChatMessageComposerView.swift in Sources */,
 				F89C23AD25E508DE0082CA5B /* ContactsViewController.swift in Sources */,
+				F81641B325E7A36F00F49800 /* iMessageChatMessageContentView.swift in Sources */,
 				F89C23A925E508DE0082CA5B /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -16,8 +16,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UIConfig.default.navigation.channelListRouter = iMessageChatChannelListRouter.self
         UIConfig.default.images.newChat = UIImage(systemName: "square.and.pencil")!
         UIConfig.default.messageComposer.messageComposerView = iMessageChatMessageComposerView.self
+        UIConfig.default.messageList.messageContentView = iMessageChatMessageContentView.self
+        UIConfig.default.messageList.outgoingMessageCell = iMessageСhatOutgoingMessageCollectionViewCell.self
+        UIConfig.default.messageList.incomingMessageCell = iMessageСhatOutgoingMessageCollectionViewCell.self
         UIConfig.default.messageComposer.messageComposerViewController = iMessageChatComposerViewController.self
-        
+
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.makeKeyAndVisible()
         window?.rootViewController = UINavigationController(
