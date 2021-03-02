@@ -12,17 +12,16 @@ import SwiftUI
 
 @available(iOS 14, *)
 public struct CustomChannelListItemView: ChatChannelListItemViewSwiftUI_ {
-    public typealias ExtraData = NoExtraData
 
     @EnvironmentObject var uiConfig: UIConfig
+    @ObservedObject var dataSource: _ChatChannelListItemView_DataSource<NoExtraData>
 
-    public var channel: _ChatChannel<ExtraData>?
-    public var currentUserId: UserId?
-
-    public init() { }
+    public init(dataSource: _ChatChannelListItemView_DataSource<NoExtraData>) {
+        self.dataSource = dataSource
+    }
 
     private var channelName: String? {
-        guard let channel = channel, let currentUserId = currentUserId
+        guard let channel = dataSource.channel, let currentUserId = dataSource.currentUserId
         else { return nil }
 
         let namer = uiConfig.channelList.channelNamer.init()
@@ -40,7 +39,7 @@ public struct CustomChannelListItemView: ChatChannelListItemViewSwiftUI_ {
                     .fontWeight(.medium)
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .offset(x: 10)
-                Text(channel?.lastMessageAt?.getFormattedDate(format: "hh:mm a") ?? "")
+                Text(dataSource.channel?.lastMessageAt?.getFormattedDate(format: "hh:mm a") ?? "")
                     .font(.caption)
                     .foregroundColor(.gray)
                     .frame(maxWidth: .infinity, alignment: .leading)
