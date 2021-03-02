@@ -12,22 +12,25 @@ import SwiftUI
 // swiftlint:disable all
 
 @available(iOS 14, *)
-public typealias ChatChannelListItemViewDataSource<ExtraData, Content: ChatChannelListItemViewSwiftUI_> =
-    _ChatChannelListItemViewBase<ExtraData>.SwiftUI<Content> where Content.ExtraData == ExtraData
-
-@available(iOS 14, *)
-public protocol ChatChannelListItemViewSwiftUI_: View {
+public protocol _ChatChannelListItemViewSwiftUIView: View {
     associatedtype ExtraData: ExtraDataTypes
-    init(dataSource: ChatChannelListItemViewDataSource<ExtraData, Self>)
+    init(dataSource: _ChatChannelListItemView<ExtraData>.ObservedObject<Self>)
 }
 
 @available(iOS 14, *)
-extension _ChatChannelListItemViewBase {
-    public class SwiftUI<Content: ChatChannelListItemViewSwiftUI_>:
-        _ChatChannelListItemViewBase<ExtraData>,
-        ObservableObject where Content.ExtraData == ExtraData
+extension _ChatChannelListItemView {
+
+    public typealias ObservedObject<Content: SwiftUIView> = SwiftUIWrapper<Content> where Content.ExtraData == ExtraData
+
+    public typealias SwiftUIView = _ChatChannelListItemViewSwiftUIView
+
+    public class SwiftUIWrapper<Content: SwiftUIView>: _ChatChannelListItemView<ExtraData>, ObservableObject
+        where Content.ExtraData == ExtraData
     {
         var hostingController: UIHostingController<Content>?
+
+        public override func defaultAppearance() {}
+        public override func setUpAppearance() {}
 
         override public func setUp() {
             let view = Content.init(dataSource: self)

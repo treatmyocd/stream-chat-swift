@@ -11,13 +11,13 @@ import StreamChatUI
 import SwiftUI
 
 @available(iOS 14, *)
-public struct CustomChannelListItemView: ChatChannelListItemViewSwiftUI_ {
-    public typealias ExtraData = NoExtraData
+public struct CustomChannelListItemView: ChatChannelListItemView.SwiftUIView {
+    public typealias ExtraData = NoExtraData // todo: how to remove this?
 
     @EnvironmentObject var uiConfig: UIConfig
-    @ObservedObject var dataSource: ChatChannelListItemViewDataSource<ExtraData, Self>
+    @ObservedObject var dataSource: ChatChannelListItemView.ObservedObject<Self>
 
-    public init(dataSource: ChatChannelListItemViewDataSource<ExtraData, Self>) {
+    public init(dataSource: ChatChannelListItemView.ObservedObject<Self>) {
         self.dataSource = dataSource
     }
 
