@@ -33,7 +33,7 @@ struct ChannelListView: View {
 
         // Setup custom config
         StreamChatUI.UIConfig.default.channelList.channelListItemView =
-            ChatChannelListItemView.SwiftUI<CustomChannelListItemView, NoExtraData>.self
+            ChatChannelListItemView.SwiftUI<CustomChannelListItemView>.self
     }
 
     // MARK: - Body
