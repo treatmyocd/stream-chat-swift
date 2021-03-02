@@ -25,7 +25,7 @@ public class _ChatChannelListItemView_DataSource<ExtraData: ExtraDataTypes>: Obs
 
 @available(iOS 14, *)
 extension _ChatChannelListItemViewBase {
-    public class SwiftUI<Content: ChatChannelListItemViewSwiftUI_, ExtraData>:
+    public class SwiftUI<Content: ChatChannelListItemViewSwiftUI_>:
         _ChatChannelListItemViewBase<ExtraData> where Content.ExtraData == ExtraData
     {
         var hostingController: UIHostingController<Content>?
