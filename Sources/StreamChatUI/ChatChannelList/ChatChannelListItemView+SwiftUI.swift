@@ -14,36 +14,35 @@ import SwiftUI
 @available(iOS 14, *)
 public protocol ChatChannelListItemViewSwiftUI_: View {
     associatedtype ExtraData: ExtraDataTypes
-    init(dataSource: _ChatChannelListItemView_DataSource<ExtraData>)
-}
 
-@available(iOS 14, *)
-public class _ChatChannelListItemView_DataSource<ExtraData: ExtraDataTypes>: ObservableObject {
-    @Published public var channel: _ChatChannel<ExtraData>?
-    @Published public var currentUserId: UserId?
+    var channel: _ChatChannel<ExtraData>? { get set }
+    var currentUserId: UserId? { get set }
+
+    init()
 }
 
 @available(iOS 14, *)
 extension _ChatChannelListItemViewBase {
-    public class SwiftUI<Content: ChatChannelListItemViewSwiftUI_, ExtraData>:
-        _ChatChannelListItemViewBase<ExtraData> where Content.ExtraData == ExtraData
+    public class SwiftUI<Content: ChatChannelListItemViewSwiftUI_>:
+        _ChatChannelListItemViewBase<Content.ExtraData>
     {
+        private var view: Content = Content.init()
+
         var hostingController: UIHostingController<Content>?
-        
-        lazy var dataSource = _ChatChannelListItemView_DataSource<ExtraData>()
-        
+
         override public func setUp() {
-            let view = Content.init(dataSource: self.dataSource)
             hostingController = UIHostingController(rootView: view)
         }
-        
+
         override public func setUpLayout() {
             embed(hostingController!.view)
         }
-        
+
         override public func updateContent() {
-            self.dataSource.channel = content.channel
-            self.dataSource.currentUserId = content.currentUserId
+            view.channel = content.channel
+            view.currentUserId = content.currentUserId
+            
+            hostingController?.rootView = view
         }
     }
 }
