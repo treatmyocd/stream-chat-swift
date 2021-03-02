@@ -27,9 +27,6 @@ extension _ChatChannelListItemViewBase {
         _ChatChannelListItemViewBase<ExtraData>,
         ObservableObject where Content.ExtraData == ExtraData
     {
-        @Published public var channel: _ChatChannel<ExtraData>?
-        @Published public var currentUserId: UserId?
-
         var hostingController: UIHostingController<Content>?
 
         override public func setUp() {
@@ -42,8 +39,7 @@ extension _ChatChannelListItemViewBase {
         }
 
         override public func updateContent() {
-            self.channel = content.channel
-            self.currentUserId = content.currentUserId
+            objectWillChange.send()
         }
     }
 }

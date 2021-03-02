@@ -22,7 +22,7 @@ public struct CustomChannelListItemView: ChatChannelListItemViewSwiftUI_ {
     }
 
     private var channelName: String? {
-        guard let channel = dataSource.channel, let currentUserId = dataSource.currentUserId
+        guard let channel = dataSource.content.channel, let currentUserId = dataSource.content.currentUserId
         else { return nil }
 
         let namer = uiConfig.channelList.channelNamer.init()
@@ -40,7 +40,7 @@ public struct CustomChannelListItemView: ChatChannelListItemViewSwiftUI_ {
                     .fontWeight(.medium)
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .offset(x: 10)
-                Text(dataSource.channel?.lastMessageAt?.getFormattedDate(format: "hh:mm a") ?? "")
+                Text(dataSource.content.channel?.lastMessageAt?.getFormattedDate(format: "hh:mm a") ?? "")
                     .font(.caption)
                     .foregroundColor(.gray)
                     .frame(maxWidth: .infinity, alignment: .leading)
