@@ -12,38 +12,38 @@ import SwiftUI
 // swiftlint:disable all
 
 @available(iOS 14, *)
-public protocol ChatChannelListItemViewSwiftUI_: View {
-    associatedtype ExtraData: ExtraDataTypes
-    init(dataSource: _ChatChannelListItemView_DataSource<ExtraData>)
-}
+public typealias ChatChannelListItemViewDataSource<ExtraData, Content: ChatChannelListItemViewSwiftUI_> =
+    _ChatChannelListItemViewBase<ExtraData>.SwiftUI<Content> where Content.ExtraData == ExtraData
 
 @available(iOS 14, *)
-public class _ChatChannelListItemView_DataSource<ExtraData: ExtraDataTypes>: ObservableObject {
-    @Published public var channel: _ChatChannel<ExtraData>?
-    @Published public var currentUserId: UserId?
+public protocol ChatChannelListItemViewSwiftUI_: View {
+    associatedtype ExtraData: ExtraDataTypes
+    init(dataSource: ChatChannelListItemViewDataSource<ExtraData, Self>)
 }
 
 @available(iOS 14, *)
 extension _ChatChannelListItemViewBase {
     public class SwiftUI<Content: ChatChannelListItemViewSwiftUI_>:
-        _ChatChannelListItemViewBase<ExtraData> where Content.ExtraData == ExtraData
+        _ChatChannelListItemViewBase<ExtraData>,
+        ObservableObject where Content.ExtraData == ExtraData
     {
+        @Published public var channel: _ChatChannel<ExtraData>?
+        @Published public var currentUserId: UserId?
+
         var hostingController: UIHostingController<Content>?
-        
-        lazy var dataSource = _ChatChannelListItemView_DataSource<ExtraData>()
-        
+
         override public func setUp() {
-            let view = Content.init(dataSource: self.dataSource)
+            let view = Content.init(dataSource: self)
             hostingController = UIHostingController(rootView: view)
         }
-        
+
         override public func setUpLayout() {
             embed(hostingController!.view)
         }
-        
+
         override public func updateContent() {
-            self.dataSource.channel = content.channel
-            self.dataSource.currentUserId = content.currentUserId
+            self.channel = content.channel
+            self.currentUserId = content.currentUserId
         }
     }
 }

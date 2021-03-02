@@ -12,11 +12,12 @@ import SwiftUI
 
 @available(iOS 14, *)
 public struct CustomChannelListItemView: ChatChannelListItemViewSwiftUI_ {
+    public typealias ExtraData = NoExtraData
 
     @EnvironmentObject var uiConfig: UIConfig
-    @ObservedObject var dataSource: _ChatChannelListItemView_DataSource<NoExtraData>
+    @ObservedObject var dataSource: ChatChannelListItemViewDataSource<ExtraData, Self>
 
-    public init(dataSource: _ChatChannelListItemView_DataSource<NoExtraData>) {
+    public init(dataSource: ChatChannelListItemViewDataSource<ExtraData, Self>) {
         self.dataSource = dataSource
     }
 
