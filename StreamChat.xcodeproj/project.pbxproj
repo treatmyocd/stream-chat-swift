@@ -822,6 +822,7 @@
 		F8CF047C25ED433000077209 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8CF047B25ED433000077209 /* Colors.swift */; };
 		F8CF048625ED470100077209 /* SlackChatChannelListItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8CF048525ED470100077209 /* SlackChatChannelListItemView.swift */; };
 		F8CF049025ED496A00077209 /* SlackChatChannelAvatarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8CF048F25ED496A00077209 /* SlackChatChannelAvatarView.swift */; };
+		F8CF04AF25EF7D9F00077209 /* iMessageCellSeparatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8CF04AE25EF7D9F00077209 /* iMessageCellSeparatorView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1791,6 +1792,7 @@
 		F8CF047B25ED433000077209 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		F8CF048525ED470100077209 /* SlackChatChannelListItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlackChatChannelListItemView.swift; sourceTree = "<group>"; };
 		F8CF048F25ED496A00077209 /* SlackChatChannelAvatarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlackChatChannelAvatarView.swift; sourceTree = "<group>"; };
+		F8CF04AE25EF7D9F00077209 /* iMessageCellSeparatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iMessageCellSeparatorView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -3703,6 +3705,7 @@
 			children = (
 				F89C23A825E508DE0082CA5B /* AppDelegate.swift */,
 				F8AADE3B25E53DF9005E8528 /* iMessageChatChannelListItemView.swift */,
+				F8CF04AE25EF7D9F00077209 /* iMessageCellSeparatorView.swift */,
 				F89C23AC25E508DE0082CA5B /* iMessageChatChannelListViewController.swift */,
 				F86D799225E659BA00379BC3 /* iMessageChatChannelViewController.swift */,
 				F81641BC25E7AEBC00F49800 /* iMessageСhatOutgoingMessageCollectionViewCell.swift */,
@@ -5101,6 +5104,7 @@
 				F8AADE3C25E53DFA005E8528 /* iMessageChatChannelListItemView.swift in Sources */,
 				F8BA4F9225E694F90078BA9D /* iMessageChatMessageComposerView.swift in Sources */,
 				F89C23AD25E508DE0082CA5B /* iMessageChatChannelListViewController.swift in Sources */,
+				F8CF04AF25EF7D9F00077209 /* iMessageCellSeparatorView.swift in Sources */,
 				F81641B325E7A36F00F49800 /* iMessageChatMessageContentView.swift in Sources */,
 				F89C23A925E508DE0082CA5B /* AppDelegate.swift in Sources */,
 			);

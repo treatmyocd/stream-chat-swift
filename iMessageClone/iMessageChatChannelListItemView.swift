@@ -80,11 +80,6 @@ final class iMessageChatChannelListItemView: ChatChannelListItemView {
             avatarView.leadingAnchor.constraint(equalTo: cellContentView.leadingAnchor, constant: 26),
             avatarView.heightAnchor.constraint(equalToConstant: 48),
             avatarView.widthAnchor.constraint(equalTo: avatarView.heightAnchor),
-            // TODO: `bottomSeparatorView` leading anchor is currently not customizable
-//            bottomSeparatorView.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor),
-//            bottomSeparatorView.topAnchor.constraint(equalTo: avatarView.bottomAnchor, constant: 17.5),
-//            bottomSeparatorView.bottomAnchor.constraint(equalTo: cellContentView.bottomAnchor),
-//            bottomSeparatorView.heightAnchor.constraint(equalToConstant: 0.4),
         ])
     }
     
