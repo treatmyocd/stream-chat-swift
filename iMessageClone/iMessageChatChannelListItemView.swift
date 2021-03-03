@@ -7,7 +7,6 @@ import StreamChatUI
 
 final class iMessageChatChannelListItemView: ChatChannelListItemView {
     private lazy var unreadView = UIView()
-    private lazy var _timestampLabel = UILabel()
     
     override func setUpAppearance() {
         super.setUpAppearance()
@@ -17,9 +16,8 @@ final class iMessageChatChannelListItemView: ChatChannelListItemView {
         unreadView.layer.cornerRadius = 5
         unreadView.clipsToBounds = true
         
-        timestampLabel.isHidden = true
-        _timestampLabel.font = .systemFont(ofSize: 15)
-        _timestampLabel.textColor = .gray
+        timestampLabel.font = .systemFont(ofSize: 15)
+        timestampLabel.textColor = .gray
         
         subtitleLabel.numberOfLines = 2
     }
@@ -49,9 +47,9 @@ final class iMessageChatChannelListItemView: ChatChannelListItemView {
 
         timestampStackView.addArrangedSubview(titleLabel)
         
-        _timestampLabel.translatesAutoresizingMaskIntoConstraints = false
-        _timestampLabel.setContentCompressionResistancePriority(.required, for: .horizontal)
-        timestampStackView.addArrangedSubview(_timestampLabel)
+        timestampLabel.setContentCompressionResistancePriority(.required, for: .horizontal)
+        NSLayoutConstraint.deactivate(layout.timestampLabelConstraints)
+        timestampStackView.addArrangedSubview(timestampLabel)
         
         let timestampAccessoryView = UIImageView(
             image: UIImage(
@@ -67,7 +65,7 @@ final class iMessageChatChannelListItemView: ChatChannelListItemView {
         timestampAccessoryView.setContentHuggingPriority(.required, for: .horizontal)
         timestampStackView.addArrangedSubview(timestampAccessoryView)
         NSLayoutConstraint.activate([
-            timestampAccessoryView.heightAnchor.constraint(equalTo: _timestampLabel.heightAnchor, constant: -6),
+            timestampAccessoryView.heightAnchor.constraint(equalTo: timestampLabel.heightAnchor, constant: -6),
         ])
         
         titleLabel.setContentHuggingPriority(.defaultLow, for: .horizontal)
@@ -89,7 +87,7 @@ final class iMessageChatChannelListItemView: ChatChannelListItemView {
         unreadView.isHidden = unreadCountView.isHidden
         unreadCountView.isHidden = true
 
-        _timestampLabel.text = content.channel?.lastMessageAt?.formatRelativeString() ?? ""
+        timestampLabel.text = content.channel?.lastMessageAt?.formatRelativeString() ?? ""
     }
 }
 

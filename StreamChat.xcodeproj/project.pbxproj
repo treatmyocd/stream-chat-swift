@@ -826,6 +826,7 @@
 		F8CF04BA25EF89FD00077209 /* UIImageView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 888123DF255D4D2100070D5A /* UIImageView+Extensions.swift */; };
 		F8CF04CC25EFB07A00077209 /* SlackChatChannelListRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8CF04CB25EFB07A00077209 /* SlackChatChannelListRouter.swift */; };
 		F8CF04D625EFB0A500077209 /* SlackChatChannelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8CF04D525EFB0A500077209 /* SlackChatChannelViewController.swift */; };
+		F8CF04E025EFB40D00077209 /* SlackChatChannelUnreadCountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8CF04DF25EFB40D00077209 /* SlackChatChannelUnreadCountView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1798,6 +1799,7 @@
 		F8CF04AE25EF7D9F00077209 /* iMessageCellSeparatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iMessageCellSeparatorView.swift; sourceTree = "<group>"; };
 		F8CF04CB25EFB07A00077209 /* SlackChatChannelListRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlackChatChannelListRouter.swift; sourceTree = "<group>"; };
 		F8CF04D525EFB0A500077209 /* SlackChatChannelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlackChatChannelViewController.swift; sourceTree = "<group>"; };
+		F8CF04DF25EFB40D00077209 /* SlackChatChannelUnreadCountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlackChatChannelUnreadCountView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -3733,6 +3735,7 @@
 				F8CF04D525EFB0A500077209 /* SlackChatChannelViewController.swift */,
 				F8CF048F25ED496A00077209 /* SlackChatChannelAvatarView.swift */,
 				F8CF048525ED470100077209 /* SlackChatChannelListItemView.swift */,
+				F8CF04DF25EFB40D00077209 /* SlackChatChannelUnreadCountView.swift */,
 				F8CF047B25ED433000077209 /* Colors.swift */,
 				F8CF043325ED388800077209 /* Assets.xcassets */,
 				F8CF043525ED388800077209 /* LaunchScreen.storyboard */,
@@ -5130,6 +5133,7 @@
 				F8CF048625ED470100077209 /* SlackChatChannelListItemView.swift in Sources */,
 				F8CF04D625EFB0A500077209 /* SlackChatChannelViewController.swift in Sources */,
 				F8CF042B25ED388500077209 /* AppDelegate.swift in Sources */,
+				F8CF04E025EFB40D00077209 /* SlackChatChannelUnreadCountView.swift in Sources */,
 				F8CF04CC25EFB07A00077209 /* SlackChatChannelListRouter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

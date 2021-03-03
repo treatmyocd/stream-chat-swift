@@ -15,6 +15,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UIConfig.default.navigation.channelListRouter = SlackChatChannelListRouter.self
         UIConfig.default.channelList.channelListItemSubviews.avatarView = SlackChatChannelAvatarView.self
         UIConfig.default.channelList.channelListItemView = SlackChatChannelListItemView.self
+        UIConfig.default.channelList.channelListItemSubviews.unreadCountView = SlackChatChannelUnreadCountView.self
         
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.makeKeyAndVisible()
