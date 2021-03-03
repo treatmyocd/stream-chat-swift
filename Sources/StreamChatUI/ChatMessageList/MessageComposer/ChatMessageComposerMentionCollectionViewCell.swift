@@ -18,7 +18,7 @@ open class _ChatMessageComposerMentionCellView<ExtraData: ExtraDataTypes>: _View
     }
 
     /// `_ChatChannelAvatarView` instance which holds photo of user for tagging.
-    open private(set) lazy var avatarView: _ChatChannelAvatarView<ExtraData> = uiConfig
+    open private(set) lazy var avatarView: _ChatChannelAvatarViewBase<ExtraData> = uiConfig
         .messageComposer
         .mentionAvatarView
         .init()

@@ -48,7 +48,7 @@ open class _ChatChannelListItemView<ExtraData: ExtraDataTypes>: _ChatChannelSwip
         .withAdjustingFontForContentSizeCategory
     
     /// The view used to show channels avatar.
-    open private(set) lazy var avatarView: _ChatChannelAvatarView<ExtraData> = uiConfigSubviews
+    open private(set) lazy var avatarView: _ChatChannelAvatarViewBase<ExtraData> = uiConfigSubviews
         .avatarView
         .init()
         .withoutAutoresizingMaskConstraints

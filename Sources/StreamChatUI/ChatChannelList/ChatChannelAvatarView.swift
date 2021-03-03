@@ -8,24 +8,27 @@ import UIKit
 /// A view that shows a user avatar including an indicator of the user presence (online/offline).
 public typealias ChatChannelAvatarView = _ChatChannelAvatarView<NoExtraData>
 
-/// A view that shows a user avatar including an indicator of the user presence (online/offline).
-open class _ChatChannelAvatarView<ExtraData: ExtraDataTypes>: ChatAvatarView, UIConfigProvider {
+/// Base class of `_ChatChannelAvatarView`.
+open class _ChatChannelAvatarViewBase<ExtraData: ExtraDataTypes>: ChatAvatarView, UIConfigProvider {
     public enum AvatarViewContent {
         case user(user: _ChatUser<ExtraData.User>?)
         case channelAndUserId(channel: _ChatChannel<ExtraData>?, currentUserId: UserId?)
     }
-    
+
+    /// The data this view component shows.
+    open var content: AvatarViewContent? {
+        didSet { updateContentIfNeeded() }
+    }
+}
+
+/// A view that shows a user avatar including an indicator of the user presence (online/offline).
+open class _ChatChannelAvatarView<ExtraData: ExtraDataTypes>: _ChatChannelAvatarViewBase<ExtraData> {
     /// A view indicating whether the user this view represents is online.
     open private(set) lazy var onlineIndicatorView: UIView = uiConfig
         .channelList
         .channelListItemSubviews
         .onlineIndicator.init()
         .withoutAutoresizingMaskConstraints
-
-    /// The data this view component shows.
-    open var content: AvatarViewContent? {
-        didSet { updateContentIfNeeded() }
-    }
 
     override public func defaultAppearance() {
         super.defaultAppearance()

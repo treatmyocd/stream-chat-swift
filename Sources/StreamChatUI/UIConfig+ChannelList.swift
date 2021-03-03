@@ -38,7 +38,7 @@ public extension _UIConfig {
     
     struct ChannelListItemSubviews {
         /// A view that shows a user avatar including an indicator of the user presence (online/offline).
-        public var avatarView: _ChatChannelAvatarView<ExtraData>.Type = _ChatChannelAvatarView.self
+        public var avatarView: _ChatChannelAvatarViewBase<ExtraData>.Type = _ChatChannelAvatarView.self
         /// A type for the view that shows a number of unread messages in channel.
         public var unreadCountView: _ChatChannelUnreadCountView<ExtraData>.Type = _ChatChannelUnreadCountView<ExtraData>.self
         /// A type for the view that shows a read/unread status of the last message in channel.
