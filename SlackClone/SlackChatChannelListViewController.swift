@@ -22,6 +22,12 @@ final class SlackChatChannelListViewController: ChatChannelListVC {
         self.controller = channelListController
     }
     
+    override func setUp() {
+        super.setUp()
+        
+        createNewChannelButton.addTarget(self, action: #selector(didTapCreateNewChannel), for: .touchUpInside)
+    }
+    
     override func setUpLayout() {
         let titleView = UIView()
         titleView.backgroundColor = Colors.primary
@@ -65,22 +71,46 @@ final class SlackChatChannelListViewController: ChatChannelListVC {
             jumpView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
             jumpView.topAnchor.constraint(equalTo: titleView.bottomAnchor, constant: 10),
         ])
+        
+        let createNewChannelView = UIView()
+        createNewChannelView.backgroundColor = Colors.primary
+        createNewChannelView.layer.masksToBounds = true
+        createNewChannelView.layer.cornerRadius = 30
+        createNewChannelView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(createNewChannelView)
+        NSLayoutConstraint.activate([
+            createNewChannelView.heightAnchor.constraint(equalToConstant: 60),
+            createNewChannelView.widthAnchor.constraint(equalTo: createNewChannelView.heightAnchor),
+            createNewChannelView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10),
+            createNewChannelView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
+        ])
+
+        createNewChannelButton.translatesAutoresizingMaskIntoConstraints = false
+        createNewChannelView.addSubview(createNewChannelButton)
+        NSLayoutConstraint.activate([
+            createNewChannelButton.topAnchor.constraint(equalTo: createNewChannelView.topAnchor, constant: 10),
+            createNewChannelButton.bottomAnchor.constraint(equalTo: createNewChannelView.bottomAnchor, constant: -10),
+            createNewChannelButton.leadingAnchor.constraint(equalTo: createNewChannelView.leadingAnchor, constant: 10),
+            createNewChannelButton.trailingAnchor.constraint(equalTo: createNewChannelView.trailingAnchor, constant: -10),
+        ])
     }
     
     override func setUpAppearance() {
         super.setUpAppearance()
-        
-        title = "Messages"
+
+        navigationItem.rightBarButtonItem = nil
         
         userAvatarView.isHidden = true
         navigationItem.searchController = UISearchController()
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Edit", style: .plain, target: self, action: #selector(editButtonTapped))
         
-        createNewChannelButton
-            .setImage(UIImage(systemName: "square.and.pencil"), for: .normal)
-        
         view.directionalLayoutMargins.leading = 24
+        
+        createNewChannelButton.setImage(
+            UIImage(named: "new_message"),
+            for: .normal
+        )
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -100,7 +130,7 @@ final class SlackChatChannelListViewController: ChatChannelListVC {
     }
 }
 
-final class JumpView: UIView {
+private final class JumpView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         

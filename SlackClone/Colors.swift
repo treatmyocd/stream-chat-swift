@@ -5,7 +5,7 @@
 import UIKit
 
 enum Colors {
-    static let primary = UIColor(hex: 0x3E3139)
+    static let primary = UIColor(hex: 0x611f69)
     static let background = UIColor.white
     static let border = UIColor(hex: 0xD3D3D3)
     static let text = UIColor.black

@@ -823,6 +823,9 @@
 		F8CF048625ED470100077209 /* SlackChatChannelListItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8CF048525ED470100077209 /* SlackChatChannelListItemView.swift */; };
 		F8CF049025ED496A00077209 /* SlackChatChannelAvatarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8CF048F25ED496A00077209 /* SlackChatChannelAvatarView.swift */; };
 		F8CF04AF25EF7D9F00077209 /* iMessageCellSeparatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8CF04AE25EF7D9F00077209 /* iMessageCellSeparatorView.swift */; };
+		F8CF04BA25EF89FD00077209 /* UIImageView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 888123DF255D4D2100070D5A /* UIImageView+Extensions.swift */; };
+		F8CF04CC25EFB07A00077209 /* SlackChatChannelListRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8CF04CB25EFB07A00077209 /* SlackChatChannelListRouter.swift */; };
+		F8CF04D625EFB0A500077209 /* SlackChatChannelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8CF04D525EFB0A500077209 /* SlackChatChannelViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1793,6 +1796,8 @@
 		F8CF048525ED470100077209 /* SlackChatChannelListItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlackChatChannelListItemView.swift; sourceTree = "<group>"; };
 		F8CF048F25ED496A00077209 /* SlackChatChannelAvatarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlackChatChannelAvatarView.swift; sourceTree = "<group>"; };
 		F8CF04AE25EF7D9F00077209 /* iMessageCellSeparatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iMessageCellSeparatorView.swift; sourceTree = "<group>"; };
+		F8CF04CB25EFB07A00077209 /* SlackChatChannelListRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlackChatChannelListRouter.swift; sourceTree = "<group>"; };
+		F8CF04D525EFB0A500077209 /* SlackChatChannelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlackChatChannelViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -3724,6 +3729,8 @@
 			children = (
 				F8CF042A25ED388500077209 /* AppDelegate.swift */,
 				F8CF046925ED417200077209 /* SlackChatChannelListViewController.swift */,
+				F8CF04CB25EFB07A00077209 /* SlackChatChannelListRouter.swift */,
+				F8CF04D525EFB0A500077209 /* SlackChatChannelViewController.swift */,
 				F8CF048F25ED496A00077209 /* SlackChatChannelAvatarView.swift */,
 				F8CF048525ED470100077209 /* SlackChatChannelListItemView.swift */,
 				F8CF047B25ED433000077209 /* Colors.swift */,
@@ -3995,6 +4002,8 @@
 				F8CF045F25ED398500077209 /* PBXTargetDependency */,
 			);
 			name = SlackClone;
+			packageProductDependencies = (
+			);
 			productName = SlackClone;
 			productReference = F8CF042825ED388500077209 /* SlackClone.app */;
 			productType = "com.apple.product-type.application";
@@ -5114,11 +5123,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F8CF04BA25EF89FD00077209 /* UIImageView+Extensions.swift in Sources */,
 				F8CF049025ED496A00077209 /* SlackChatChannelAvatarView.swift in Sources */,
 				F8CF046A25ED417200077209 /* SlackChatChannelListViewController.swift in Sources */,
 				F8CF047C25ED433000077209 /* Colors.swift in Sources */,
 				F8CF048625ED470100077209 /* SlackChatChannelListItemView.swift in Sources */,
+				F8CF04D625EFB0A500077209 /* SlackChatChannelViewController.swift in Sources */,
 				F8CF042B25ED388500077209 /* AppDelegate.swift in Sources */,
+				F8CF04CC25EFB07A00077209 /* SlackChatChannelListRouter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
