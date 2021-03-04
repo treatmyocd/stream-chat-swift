@@ -143,6 +143,7 @@ extension _ChatChannelListVC: _ChatChannelListControllerDelegate {
         didChangeChannels changes: [ListChange<_ChatChannel<ExtraData>>]
     ) {
         var movedItems: [IndexPath] = []
+//        self.collectionViewLayout.invalidateLayout()
         collectionView.performBatchUpdates(
             {
                 for change in changes {
@@ -163,6 +164,7 @@ extension _ChatChannelListVC: _ChatChannelListControllerDelegate {
                 // Move changes from NSFetchController also can mean an update of the content.
                 // Since a `moveItem` in collections do not update the content of the cell, we need to reload those cells.
                 self.collectionView.reloadItems(at: movedItems)
+//                self.collectionViewLayout.invalidateLayout()
             }
         )
     }

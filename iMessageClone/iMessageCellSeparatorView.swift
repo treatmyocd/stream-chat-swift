@@ -8,11 +8,11 @@ import StreamChatUI
 
 final class iMessageCellSeparatorView: CellSeparatorReusableView {
     override func setUpLayout() {
-//        NSLayoutConstraint.activate([
-//            leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor),
-//            topAnchor.constraint(equalTo: avatarView.bottomAnchor, constant: 17.5),
-//            bottomAnchor.constraint(equalTo: cellContentView.bottomAnchor),
-//            heightAnchor.constraint(equalToConstant: 0.4),
-//        ])
+        super.setUpLayout()
+        
+        NSLayoutConstraint.activate([
+//            separatorView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 26),
+            separatorView.heightAnchor.constraint(equalToConstant: 4),
+        ])
     }
 }

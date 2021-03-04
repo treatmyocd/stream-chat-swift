@@ -38,11 +38,31 @@ open class ListCollectionViewLayout: UICollectionViewFlowLayout{
             height: estimatedItemSize.height
         )
     }
+    
+    open override func invalidateLayout(with context: UICollectionViewLayoutInvalidationContext) {
+        super.invalidateLayout(with: context)
+        guard let indexPaths = context.invalidatedItemIndexPaths else {
+            return
+        }
+        context.invalidateDecorationElements(ofKind: separatorIdentifier, at: indexPaths)
+        print(context.invalidatedDecorationIndexPaths)
+    }
 
     override open func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
+        print("LAYOUT!!")
         let cellAttributes = super.layoutAttributesForElements(in: rect) ?? []
         let separatorAttributes = separatorLayoutAttributes(forCellLayoutAttributes: cellAttributes)
         return cellAttributes + separatorAttributes
+    }
+
+    open override func shouldInvalidateLayout(forBoundsChange newBounds: CGRect) -> Bool {
+        true
+    }
+    
+    open override func layoutAttributesForDecorationView(ofKind elementKind: String, at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
+        guard let cellAttributes = super.layoutAttributesForItem(at: indexPath) else { return nil }
+        print("DECORATION!!")
+        return separatorLayoutAttributes(forCellLayoutAttributes: [cellAttributes]).first
     }
 
     private func separatorLayoutAttributes(
@@ -65,7 +85,8 @@ open class ListCollectionViewLayout: UICollectionViewFlowLayout{
             )
 
             let cellFrame = cellAttribute.frame
-
+            print("Separator!!")
+            print(cellFrame)
             separatorAttribute.frame = CGRect(
                 x: cellFrame.origin.x,
                 y: cellFrame.origin.y + cellFrame.size.height,

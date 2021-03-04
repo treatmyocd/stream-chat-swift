@@ -10,8 +10,9 @@ import StreamChatUI
 class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {        
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         UIConfig.default.channelList.channelListItemView = iMessageChatChannelListItemView.self
+//        UIConfig.default.channelList.channelCellSeparatorReusableView = iMessageCellSeparatorView.self
 
         UIConfig.default.navigation.channelListRouter = iMessageChatChannelListRouter.self
         UIConfig.default.images.newChat = UIImage(systemName: "square.and.pencil")!
