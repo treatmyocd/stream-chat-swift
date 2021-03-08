@@ -56,11 +56,8 @@ open class _ChatMessageComposerVC<ExtraData: ExtraDataTypes>: _ViewController,
         }
     }
     
-    var isEmpty: Bool = true {
-        didSet {
-            setInput(shrinked: isEmpty)
-            updateSendButton()
-        }
+    var isEmpty: Bool {
+        textView.text.isEmpty
     }
     
     // MARK: - Subviews
@@ -511,7 +508,9 @@ open class _ChatMessageComposerVC<ExtraData: ExtraDataTypes>: _ViewController,
     // MARK: - UITextViewDelegate
 
     public func textViewDidChange(_ textView: UITextView) {
-        isEmpty = textView.text.replacingOccurrences(of: " ", with: "").isEmpty
+        setInput(shrinked: isEmpty)
+        updateSendButton()
+
         replaceTextWithSlashCommandViewIfNeeded()
 
         updateMentionFlag(with: textView.text as NSString, till: textView.selectedRange.location)
