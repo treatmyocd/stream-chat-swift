@@ -760,16 +760,13 @@
 		E7166CE225BEE20600B03B07 /* UIConfig+Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7166CE125BEE20600B03B07 /* UIConfig+Images.swift */; };
 		E73262E025ED64AB008CB152 /* ChatChannelNamer_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E73262D725ED6432008CB152 /* ChatChannelNamer_Tests.swift */; };
 		E73A8B2B2578EB2B00FBDC56 /* ChatMessageComposerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E73A8B2A2578EB2B00FBDC56 /* ChatMessageComposerVC.swift */; };
-		E759AC4D256E694F00341865 /* ChatOnlineIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E759AC4C256E694F00341865 /* ChatOnlineIndicatorView.swift */; };
 		E76B2F0425F23EE200E57112 /* CustomUIViewSubclasses.swift in Sources */ = {isa = PBXBuildFile; fileRef = E70A09E925F230EE00C55BBE /* CustomUIViewSubclasses.swift */; };
-		E791E4D625D3E2DA00B0E076 /* ChatChannelAvatarView_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E791E4D525D3E2DA00B0E076 /* ChatChannelAvatarView_Tests.swift */; };
 		E79AC10A25831A1500C3CE5D /* ChatMessageComposerMentionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E79AC10625831A1100C3CE5D /* ChatMessageComposerMentionCollectionViewCell.swift */; };
 		E79AC10B25831A1500C3CE5D /* ChatMessageComposerCommandCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E79AC10725831A1500C3CE5D /* ChatMessageComposerCommandCollectionViewCell.swift */; };
 		E79AC10C25831A1500C3CE5D /* ChatMessageComposerSuggestionsCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E79AC10825831A1500C3CE5D /* ChatMessageComposerSuggestionsCollectionView.swift */; };
 		E79AC10D25831A1500C3CE5D /* ChatMessageComposerSuggestionsCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = E79AC10925831A1500C3CE5D /* ChatMessageComposerSuggestionsCollectionViewLayout.swift */; };
 		E7A37B8425ADA66E0055458F /* ChatMessageComposerSuggestionsCommandsHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A37B8325ADA66E0055458F /* ChatMessageComposerSuggestionsCommandsHeaderView.swift */; };
 		E7AD954F25D536AA00076DC3 /* SystemEnvironment+Version.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7AD954E25D536AA00076DC3 /* SystemEnvironment+Version.swift */; };
-		E7AD958925D7510900076DC3 /* ChatMessageComposerMentionCellView_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7AD958825D7510900076DC3 /* ChatMessageComposerMentionCellView_Tests.swift */; };
 		E7C4E74D259D54B5002889AC /* ChatChannelSwipeableListItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7C4E74C259D54B5002889AC /* ChatChannelSwipeableListItemView.swift */; };
 		E7DD8EA825E3F7F50059A322 /* MessageWithBrokenAttachments.json in Resources */ = {isa = PBXBuildFile; fileRef = E7DD8EA725E3F7F50059A322 /* MessageWithBrokenAttachments.json */; };
 		E7DD8EC125E4083B0059A322 /* OptionalDecodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7DD8EC025E4083B0059A322 /* OptionalDecodable.swift */; };
@@ -4348,11 +4345,8 @@
 				2208246A25DFD0060033544B /* ChatChannelListRouter_Mock.swift in Sources */,
 				ADAA377125E43C3700C31528 /* ChatMessageComposerSuggestionsViewController_Tests.swift in Sources */,
 				E73262E025ED64AB008CB152 /* ChatChannelNamer_Tests.swift in Sources */,
-				E7AD958925D7510900076DC3 /* ChatMessageComposerMentionCellView_Tests.swift in Sources */,
 				79158D4425F15BE600186102 /* UIConfig+SwiftUI_Tests.swift in Sources */,
-				E7AD958925D7510900076DC3 /* ChatMessageComposerMentionCellView_Tests.swift in Sources */,
 				79158D5B25F15CF900186102 /* AssertAsync.swift in Sources */,
-				E791E4D625D3E2DA00B0E076 /* ChatChannelAvatarView_Tests.swift in Sources */,
 				225504C725DEA03700A5A65A /* ChatChannelListItemView_Tests.swift in Sources */,
 				79B4F0E625D305D40063FFB5 /* CurrentChatUserAvatarView_Tests.swift in Sources */,
 				AD016A1425CAFAF2009EBAD2 /* ChatChannelListVC_Tests.swift in Sources */,
