@@ -124,6 +124,7 @@ open class _ChatMessageComposerVC<ExtraData: ExtraDataTypes>: _ViewController,
             composerView.container.topStackView.setAnimatedly(hidden: false)
             composerView.quotedMessageView.setAnimatedly(hidden: false)
             composerView.quotedMessageView.message = messageToQuote
+            composerView.messageInputView.slashCommandView.isHidden = true
             composerView.invalidateIntrinsicContentSize()
         case let .edit(message):
             composerView.sendButton.mode = .edit
@@ -131,6 +132,7 @@ open class _ChatMessageComposerVC<ExtraData: ExtraDataTypes>: _ViewController,
             let image = uiConfig.images.messageComposerEditMessage.tinted(with: uiConfig.colorPalette.inactiveTint)
             composerView.stateIcon.image = image
             composerView.container.topStackView.setAnimatedly(hidden: false)
+            composerView.messageInputView.slashCommandView.isHidden = true
             textView.text = message.text
             composerView.invalidateIntrinsicContentSize()
         }
