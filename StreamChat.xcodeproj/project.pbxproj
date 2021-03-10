@@ -62,6 +62,7 @@
 		780733AF25F8EF01005F493B /* ChatChannelVC+SwiftUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 780733AE25F8EF01005F493B /* ChatChannelVC+SwiftUI.swift */; };
 		780733CF25F900AC005F493B /* ChatChannelUnreadCountView+SwiftUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 780733CE25F900AC005F493B /* ChatChannelUnreadCountView+SwiftUI.swift */; };
 		780733D825F900E3005F493B /* ChatChannelUnreadCountView+SwiftUI_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 780733D725F900E3005F493B /* ChatChannelUnreadCountView+SwiftUI_Tests.swift */; };
+		780733FE25F92209005F493B /* ChatChannelVC+SwiftUI_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 780733EE25F91F60005F493B /* ChatChannelVC+SwiftUI_Tests.swift */; };
 		7844B10C25EF92B600B87E89 /* ChatChannelListItemView+SwiftUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7844B10B25EF92B600B87E89 /* ChatChannelListItemView+SwiftUI.swift */; };
 		7844B16825EFB44600B87E89 /* UIConfig+SwiftUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7844B16725EFB44600B87E89 /* UIConfig+SwiftUI.swift */; };
 		7849AF6725F243C8007817D4 /* ChatChannelListItemView+SwiftUI_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7849AF6625F243C8007817D4 /* ChatChannelListItemView+SwiftUI_Tests.swift */; };
@@ -991,6 +992,7 @@
 		780733AE25F8EF01005F493B /* ChatChannelVC+SwiftUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ChatChannelVC+SwiftUI.swift"; sourceTree = "<group>"; };
 		780733CE25F900AC005F493B /* ChatChannelUnreadCountView+SwiftUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ChatChannelUnreadCountView+SwiftUI.swift"; sourceTree = "<group>"; };
 		780733D725F900E3005F493B /* ChatChannelUnreadCountView+SwiftUI_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ChatChannelUnreadCountView+SwiftUI_Tests.swift"; sourceTree = "<group>"; };
+		780733EE25F91F60005F493B /* ChatChannelVC+SwiftUI_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ChatChannelVC+SwiftUI_Tests.swift"; sourceTree = "<group>"; };
 		7844B10B25EF92B600B87E89 /* ChatChannelListItemView+SwiftUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ChatChannelListItemView+SwiftUI.swift"; sourceTree = "<group>"; };
 		7844B16725EFB44600B87E89 /* UIConfig+SwiftUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIConfig+SwiftUI.swift"; sourceTree = "<group>"; };
 		7849AF6625F243C8007817D4 /* ChatChannelListItemView+SwiftUI_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ChatChannelListItemView+SwiftUI_Tests.swift"; sourceTree = "<group>"; };
@@ -1978,6 +1980,7 @@
 				DB9A3D652582783F00555D36 /* ChatVC.swift */,
 				7908832D254876C100896F03 /* ChatChannelVC.swift */,
 				780733AE25F8EF01005F493B /* ChatChannelVC+SwiftUI.swift */,
+				780733EE25F91F60005F493B /* ChatChannelVC+SwiftUI_Tests.swift */,
 				882AE056257A176A004095B3 /* ChatChannelRouter.swift */,
 				DB70CFF325701FE500DDF436 /* ChatChannelNavigationBarListener.swift */,
 				DBC8A563258113F700B20A82 /* ChatThreadVC.swift */,
@@ -4354,6 +4357,7 @@
 			files = (
 				2208241625DEE8070033544B /* ChatChannelListCollectionViewCell_Tests.swift in Sources */,
 				79B4F14325D3F0F70063FFB5 /* ChannelId.swift in Sources */,
+				780733FE25F92209005F493B /* ChatChannelVC+SwiftUI_Tests.swift in Sources */,
 				69DE605A25F39E6000DC187F /* ChatMessageListCollectionViewLayout_Tests.swift in Sources */,
 				AD71130225F138BA00932AEE /* ChatChannelAvatarView_Tests.swift in Sources */,
 				7849AF6725F243C8007817D4 /* ChatChannelListItemView+SwiftUI_Tests.swift in Sources */,
