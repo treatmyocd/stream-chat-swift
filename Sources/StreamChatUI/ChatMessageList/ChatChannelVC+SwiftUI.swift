@@ -13,10 +13,18 @@ public typealias ChatChannelView = _ChatChannelVC<NoExtraData>.View
 extension _ChatChannelVC {
     /// A `UIViewControllerRepresentable` subclass which wraps `ChatChannelListVC` and shows list of channels.
     public struct View: UIViewControllerRepresentable {
-        public init() {}
+        /// The `_ChatChannelController` instance that provides chat channel data.
+        let channelController: _ChatChannelController<ExtraData>
+
+        public init(channelController: _ChatChannelController<ExtraData>) {
+            self.channelController = channelController
+        }
 
         public func makeUIViewController(context: Context) -> _ChatChannelVC<ExtraData> {
-            _ChatChannelVC<ExtraData>()
+            let vc = _ChatChannelVC<ExtraData>()
+            vc.channelController = channelController
+
+            return vc
         }
 
         public func updateUIViewController(_ chatChannelListVC: _ChatChannelVC<ExtraData>, context: Context) {}
