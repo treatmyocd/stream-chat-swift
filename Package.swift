@@ -329,6 +329,7 @@ var streamChatUIFilesExcluded: [String] { [
     "CommonViews/__Snapshots__/CurrentChatUserAvatarView_Tests/test_customizationUsingAppearanceHook.default-dark.png",
     "Utils/UIConfigProvider_Tests.swift",
     "Utils/ChatChannelNamer_Tests.swift",
+    "ChatChannelList/ChatChannelUnreadCountView+SwiftUI_Tests.swift",
     "ChatChannelList/ChatChannelListCollectionViewCell_Tests.swift",
     "ChatChannelList/ChatChannelSwipeableListItemView_Tests.swift",
     "ChatChannelList/ChatChannelListItemView+SwiftUI_Tests.swift",
@@ -408,5 +409,8 @@ var streamChatUIFilesExcluded: [String] { [
     "ChatChannelList/__Snapshots__/ChatChannelListItemView_Tests/test_appearanceCustomization_usingSubclassing.default-light.png",
     "ChatChannelList/__Snapshots__/ChatChannelListItemView+SwiftUI_Tests/test_injectedSwiftUIView.extraExtraExtraLarge-light.png",
     "ChatChannelList/__Snapshots__/ChatChannelListItemView+SwiftUI_Tests/test_injectedSwiftUIView.default-light.png",
-    "ChatChannelList/__Snapshots__/ChatChannelListItemView+SwiftUI_Tests/test_injectedSwiftUIView.small-dark.png"
+    "ChatChannelList/__Snapshots__/ChatChannelListItemView+SwiftUI_Tests/test_injectedSwiftUIView.small-dark.png",
+    "ChatChannelList/__Snapshots__/ChatChannelUnreadCountView+SwiftUI_Tests/test_injectedSwiftUIView.extraExtraExtraLarge-light.png",
+    "ChatChannelList/__Snapshots__/ChatChannelUnreadCountView+SwiftUI_Tests/test_injectedSwiftUIView.default-light.png",
+    "ChatChannelList/__Snapshots__/ChatChannelUnreadCountView+SwiftUI_Tests/test_injectedSwiftUIView.small-dark.png"
 ] }
