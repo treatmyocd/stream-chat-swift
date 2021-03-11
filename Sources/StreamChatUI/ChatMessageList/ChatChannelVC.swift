@@ -48,6 +48,21 @@ open class _ChatChannelVC<ExtraData: ExtraDataTypes>: _ChatVC<ExtraData> {
         navigationItem.largeTitleDisplayMode = .never
     }
 
+    override open func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+
+        // Required to correctly setup navigation when view is wrapped
+        // using UIHostingController and used in SwiftUI
+        guard
+            let parent = parent,
+            parent.isUIHostingController
+        else { return }
+
+        if #available(iOS 13.0, *) {
+            setupParentNavigation(parent: parent)
+        }
+    }
+
     // MARK: - ChatMessageListVCDataSource
 
     override public func numberOfMessagesInChatMessageListVC(_ vc: _ChatMessageListVC<ExtraData>) -> Int {
