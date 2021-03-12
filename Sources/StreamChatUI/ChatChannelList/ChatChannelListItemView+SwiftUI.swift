@@ -5,45 +5,81 @@
 import StreamChat
 import SwiftUI
 
+// MARK: - Base implementation
 @available(iOS 13.0, *)
-/// Protocol of `_ChatChannelListItemView` wrapper for use in SwiftUI.
-public protocol _ChatChannelListItemViewSwiftUIView: View {
-    associatedtype ExtraData: ExtraDataTypes
-    init(dataSource: _ChatChannelListItemView<ExtraData>.ObservedObject<Self>)
+public protocol BaseSwiftUIView: View {
+    init()
 }
 
 @available(iOS 13.0, *)
+struct WrappedSwiftUIView<Content: BaseSwiftUIView, DataSource: _View & ObservableObject>: View {
+    let dataSource: DataSource
+    
+    init(dataSource: DataSource) {
+        self.dataSource = dataSource
+    }
+    
+    var body: some View {
+        Content().environmentObject(dataSource)
+    }
+}
+
+@available(iOS 13.0, *)
+public class BaseSwiftUIWrapper<Content: BaseSwiftUIView, DataSource: _View & ObservableObject>: _View {
+    var hostingController: UIHostingController<WrappedSwiftUIView<Content, DataSource>>?
+    
+    let dataSource: DataSource
+    
+    init(dataSource: DataSource) {
+        self.dataSource = dataSource
+        
+        super.init(frame: .zero)
+    }
+    
+    // swiftlint:disable unavailable_function
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    override public var intrinsicContentSize: CGSize {
+        hostingController?.view.intrinsicContentSize ?? super.intrinsicContentSize
+    }
+
+    override public func setUp() {
+        super.setUp()
+
+        let view = WrappedSwiftUIView<Content, DataSource>(dataSource: dataSource)
+        hostingController = UIHostingController(rootView: view)
+    }
+
+    override public func setUpLayout() {
+        embed(hostingController!.view)
+    }
+}
+
+// MARK: - Wrapper implementation
+@available(iOS 13.0, *)
 extension _ChatChannelListItemView {
-    /// Data source of `_ChatChannelListItemView` represented as `ObservedObject`.
-    public typealias ObservedObject<Content: SwiftUIView> = SwiftUIWrapper<Content> where Content.ExtraData == ExtraData
+    public typealias SwiftUIView = BaseSwiftUIView
 
-    /// `_ChatChannelListItemView` represented in SwiftUI.
-    public typealias SwiftUIView = _ChatChannelListItemViewSwiftUIView
-
-    /// SwiftUI wrapper of `_ChatChannelListItemView`.
-    /// Servers to wrap custom SwiftUI view as a UIKit view so it can be easily injected into `_UIConfig`.
-    public class SwiftUIWrapper<Content: SwiftUIView>: _ChatChannelListItemView<ExtraData>, ObservableObject
-        where Content.ExtraData == ExtraData
+    public class DataSource: _ChatChannelListItemView<ExtraData>, ObservableObject
     {
-        var hostingController: UIHostingController<Content>?
-
-        override public var intrinsicContentSize: CGSize {
-            hostingController?.view.intrinsicContentSize ?? super.intrinsicContentSize
+        override public func updateContent() {
+            objectWillChange.send()
         }
+    }
+
+    public class SwiftUIWrapper<Content: BaseSwiftUIView, ExtraData: ExtraDataTypes>: DataSource {
+        var baseWrapper: BaseSwiftUIWrapper<Content, DataSource>?
 
         override public func setUp() {
             super.setUp()
 
-            let view = Content(dataSource: self)
-            hostingController = UIHostingController(rootView: view)
+            baseWrapper = BaseSwiftUIWrapper<Content, DataSource>(dataSource: self)
         }
 
         override public func setUpLayout() {
-            embed(hostingController!.view)
-        }
-
-        override public func updateContent() {
-            objectWillChange.send()
+            embed(baseWrapper!)
         }
     }
 }
