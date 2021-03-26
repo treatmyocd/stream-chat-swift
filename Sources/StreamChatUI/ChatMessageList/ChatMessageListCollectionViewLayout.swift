@@ -203,7 +203,7 @@ open class ChatMessageListCollectionViewLayout: UICollectionViewLayout {
             self.appearingItems.insert(ip)
             let idx = ip.item
             let item: LayoutItem
-            if idx == self.currentItems.count {
+            if idx == self.currentItems.count || self.currentItems.count == 1 {
                 item = LayoutItem(offset: 0, height: self.estimatedItemHeight)
             } else {
                 item = LayoutItem(
