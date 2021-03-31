@@ -19,6 +19,9 @@ public extension _UIConfig {
         public var messageContentSubviews = MessageContentViewSubviews()
         public var messageActionsSubviews = MessageActionsSubviews()
         public var messageReactions = MessageReactions()
+        
+        /// A view that is used as a wrapper for status data in navigationItem's titleView
+        public var titleView: _ChatMessageListTitleView<ExtraData>.Type = _ChatMessageListTitleView<ExtraData>.self
     }
 
     struct MessageActionsSubviews {

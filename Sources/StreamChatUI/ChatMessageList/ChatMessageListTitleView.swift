@@ -49,7 +49,10 @@ open class _ChatMessageListTitleView<ExtraData: ExtraDataTypes>: _View, UIConfig
     override open func updateContent() {
         super.updateContent()
         
+        titleLabel.isHidden = content.title == nil
         titleLabel.text = content.title
+        
+        subtitleLabel.isHidden = content.subtitle == nil
         subtitleLabel.text = content.subtitle
     }
 }
