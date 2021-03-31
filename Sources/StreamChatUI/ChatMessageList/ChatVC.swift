@@ -29,6 +29,12 @@ open class _ChatVC<ExtraData: ExtraDataTypes>: _ViewController,
         .messageList
         .messageListVC
         .init()
+    
+    /// View representing `titleView` in `navigationBar`
+    public private(set) lazy var titleView = uiConfig
+        .messageList
+        .titleView
+        .init()
 
     private var navbarListener: ChatChannelNavigationBarListener<ExtraData>?
     
@@ -100,14 +106,11 @@ open class _ChatVC<ExtraData: ExtraDataTypes>: _ViewController,
         super.defaultAppearance()
 
         view.backgroundColor = uiConfig.colorPalette.background
-        
-        let titleView = ChatMessageListTitleView<ExtraData>()
 
         navigationItem.titleView = titleView
 
-        navbarListener = makeNavbarListener { data in
-            titleView.title = data.title
-            titleView.subtitle = data.subtitle
+        navbarListener = makeNavbarListener { [weak self] data in
+            self?.titleView.content = data
         }
     }
 
