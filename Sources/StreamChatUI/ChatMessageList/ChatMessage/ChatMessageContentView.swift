@@ -793,6 +793,29 @@ open class _ChatMessageContentView<ExtraData: ExtraDataTypes>: _View, UIConfigPr
     }
 }
 
+public struct MessageLayoutOptions: OptionSet, Hashable {
+    public let rawValue: Int
+    
+    public init(rawValue: Int) {
+        self.rawValue = rawValue
+    }
+    
+    /// Typically the messages sent by the current user have flipped content
+    public static let flipped = Self(rawValue: 1 << 0)
+    
+    public static let avatar = Self(rawValue: 1 << 1)
+    public static let metadata = Self(rawValue: 1 << 2)
+    public static let text = Self(rawValue: 1 << 3)
+    public static let quotedMessage = Self(rawValue: 1 << 5)
+    public static let continuousBubble = Self(rawValue: 1 << 6)
+    
+    // Attachments
+    public static let attachment = Self(rawValue: 1 << 4)
+    public static let linkPreview = Self(rawValue: 1 << 7)
+    public static let photoPreview = Self(rawValue: 1 << 8)
+    public static let giphy = Self(rawValue: 1 << 9)
+}
+
 public struct ChatMessageContentViewLayoutOptions: OptionSet, Hashable {
     public let rawValue: Int
     

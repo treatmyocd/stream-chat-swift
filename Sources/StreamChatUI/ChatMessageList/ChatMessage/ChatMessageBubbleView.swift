@@ -49,6 +49,16 @@ open class _ChatMessageBubbleView<ExtraData: ExtraDataTypes>: _View, UIConfigPro
             uiConfig.colorPalette.border.cgColor
         
         layer.maskedCorners = corners
+        
+        if message?.type == .ephemeral {
+            backgroundColor = uiConfig.colorPalette.popoverBackground
+        } else if message?.layoutOptions.contains(.linkPreview) == true {
+            backgroundColor = uiConfig.colorPalette.highlightedAccentBackground1
+        } else {
+            backgroundColor = message?.isSentByCurrentUser == true ?
+                uiConfig.colorPalette.background2 :
+                uiConfig.colorPalette.popoverBackground
+        }
     }
     
     // MARK: - Private

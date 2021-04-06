@@ -68,6 +68,7 @@ extension _ChatMessageImageGallery {
 
             if let url = attachment?.localURL ?? attachment?.imagePreviewURL ?? attachment?.imageURL {
                 loadingIndicator.isVisible = true
+                
                 imageTask = loadImage(with: url, options: .shared, into: imageView, completion: { [weak self] _ in
                     self?.loadingIndicator.isVisible = false
                     self?.imageTask = nil

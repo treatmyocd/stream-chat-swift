@@ -21,7 +21,7 @@ open class _ChatMessageComposerQuoteBubbleView<ExtraData: ExtraDataTypes>: _View
         
     // MARK: - Subviews
     
-    public private(set) lazy var container = UIStackView()
+    public private(set) lazy var container = ContainerView()
         .withoutAutoresizingMaskConstraints
     
     public private(set) lazy var contentView = UIView()
@@ -83,8 +83,8 @@ open class _ChatMessageComposerQuoteBubbleView<ExtraData: ExtraDataTypes>: _View
         
         addSubview(container)
         
-        container.spacing = UIStackView.spacingUseSystem
-        container.alignment = .bottom
+        container.spacing = .auto
+        container.alignment = .axisTrailing
         
         containerConstraints = [
             container.leadingAnchor.pin(equalTo: leadingAnchor, constant: directionalLayoutMargins.leading),

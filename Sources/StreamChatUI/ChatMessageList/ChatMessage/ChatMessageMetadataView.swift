@@ -33,6 +33,8 @@ open class _ChatMessageMetadataView<ExtraData: ExtraDataTypes>: _View, UIConfigP
 
     public private(set) lazy var timestampLabel: UILabel = UILabel().withBidirectionalLanguagesSupport
     
+    public private(set) lazy var nameLabel: UILabel = UILabel().withBidirectionalLanguagesSupport
+    
     // MARK: - Overrides
 
     override public func defaultAppearance() {
@@ -43,10 +45,15 @@ open class _ChatMessageMetadataView<ExtraData: ExtraDataTypes>: _View, UIConfigP
         timestampLabel.font = uiConfig.font.subheadline
         timestampLabel.adjustsFontForContentSizeCategory = true
         timestampLabel.textColor = color
+        
+        nameLabel.font = uiConfig.font.subheadline
+        nameLabel.adjustsFontForContentSizeCategory = true
+        nameLabel.textColor = color
     }
 
     override open func setUpLayout() {
         stack.addArrangedSubview(currentUserVisabilityIndicator)
+        stack.addArrangedSubview(nameLabel)
         stack.addArrangedSubview(timestampLabel)
         embed(stack)
     }
@@ -57,6 +64,7 @@ open class _ChatMessageMetadataView<ExtraData: ExtraDataTypes>: _View, UIConfigP
         } else {
             timestampLabel.text = nil
         }
+        nameLabel.text = message?.author.name
         currentUserVisabilityIndicator.isVisible = message?.onlyVisibleForCurrentUser ?? false
     }
 }

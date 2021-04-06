@@ -42,6 +42,8 @@ open class _СhatMessageCollectionViewCell<ExtraData: ExtraDataTypes>: _Collecti
 
     open class var messageContentViewClass: _ChatMessageContentView<ExtraData>.Type { _ChatMessageContentView<ExtraData>.self }
 
+    lazy var container: ContainerView = .init()
+    
     public private(set) lazy var messageView: _ChatMessageContentView<ExtraData> = Self.messageContentViewClass.init()
         .withoutAutoresizingMaskConstraints
     
@@ -52,39 +54,202 @@ open class _СhatMessageCollectionViewCell<ExtraData: ExtraDataTypes>: _Collecti
 
     // MARK: - Lifecycle
 
+    let text = UILabel()
+    let avatar = ChatAvatarView()
+    let bubble = _ChatMessageBubbleView<ExtraData>()
+    let metada = _ChatMessageMetadataView<ExtraData>()
+    
+    let attachmentsView: _ChatMessageAttachmentsView<ExtraData> = .init()
+    
+    let vStack = ContainerView(axis: .vertical, views: [])
+    
+    public var quotedMessageView: _ChatMessageQuoteBubbleView<ExtraData>? = .init()
+    
+    lazy var bubbleContainer = ContainerView(axis: .vertical, views: []).withoutAutoresizingMaskConstraints
+    
+//    let reactions = _ChatMessageReactionsBubbleView<ExtraData>()
+    
+    let reaction = UILabel().withoutAutoresizingMaskConstraints
+    
+    var containerLeadingConstraint: NSLayoutConstraint?
+    var containerTrailingConstraint: NSLayoutConstraint?
+    
     override open func setUpLayout() {
-        contentView.addSubview(messageView)
-
+        contentView.addSubview(container.withoutAutoresizingMaskConstraints)
+        contentView.layoutMargins.top = 2
+        contentView.layoutMargins.bottom = 2
+        
+//        contentView.preservesSuperviewLayoutMargins = true
+        
+        container.alignment = .axisTrailing
+        
+        containerLeadingConstraint = container.leadingAnchor.pin(equalTo: contentView.layoutMarginsGuide.leadingAnchor)
+        containerTrailingConstraint = container.trailingAnchor.pin(equalTo: contentView.layoutMarginsGuide.trailingAnchor)
+        
         NSLayoutConstraint.activate([
-            messageView.topAnchor.pin(equalTo: contentView.topAnchor),
-            messageView.bottomAnchor.pin(equalTo: contentView.bottomAnchor),
-            messageView.widthAnchor.pin(lessThanOrEqualTo: contentView.widthAnchor, multiplier: 0.75)
+            container.topAnchor.pin(equalTo: contentView.layoutMarginsGuide.topAnchor),
+            container.bottomAnchor.pin(equalTo: contentView.layoutMarginsGuide.bottomAnchor),
+            container.widthAnchor.pin(lessThanOrEqualTo: contentView.layoutMarginsGuide.widthAnchor, multiplier: 0.75),
+            
+            // Avatar
+            avatar.widthAnchor.pin(equalTo: avatar.heightAnchor),
+            avatar.widthAnchor.pin(equalToConstant: 30)
         ])
+        container.addArrangedSubview(avatar)
+        
+        vStack.spacing = 1
+        vStack.alignment = .axisLeading
+        
+        vStack.addArrangedSubview(bubble)
+        vStack.addArrangedSubview(metada)
+
+        metada.timestampLabel.setContentCompressionResistancePriority(.required, for: .vertical)
+        
+        container.addArrangedSubview(vStack)
+        
+        text.numberOfLines = 0
+        text.setContentCompressionResistancePriority(.required, for: .vertical)
+        bubbleContainer.addArrangedSubview(text)
+        bubbleContainer.isLayoutMarginsRelativeArrangement = true
+        
+        bubble.addSubview(bubbleContainer)
+        bubbleContainer.pin(to: bubble)
+        reaction.contentMode = .top
+        reaction.setContentCompressionResistancePriority(.required, for: .vertical)
+//        container.addArrangedSubview(ContainerView(axis: .vertical, alignment: .fill, views: [reaction, UIView()]))
     }
 
     override open func updateContent() {
-        messageView.message = message
+        if message?.isSentByCurrentUser == true {
+            container.ordering = .trailingToLeading
+            vStack.alignment = .axisTrailing
+            containerTrailingConstraint?.isActive = true
+            containerLeadingConstraint?.isActive = false
 
-        switch message?.isSentByCurrentUser {
-        case true?:
-            assert(messageViewLeadingConstraint == nil, "The cell was already used for incoming message")
-            if messageViewTrailingConstraint == nil {
-                messageViewTrailingConstraint = messageView.trailingAnchor
-                    .pin(equalTo: contentView.layoutMarginsGuide.trailingAnchor)
-                messageViewTrailingConstraint!.isActive = true
-            }
-
-        case false?:
-            assert(messageViewTrailingConstraint == nil, "The cell was already used for outgoing message")
-            if messageViewLeadingConstraint == nil {
-                messageViewLeadingConstraint = messageView.leadingAnchor
-                    .pin(equalTo: contentView.layoutMarginsGuide.leadingAnchor)
-                messageViewLeadingConstraint!.isActive = true
-            }
-
-        case nil:
-            break
+        } else {
+            container.ordering = .leadingToTrailing
+            vStack.alignment = .axisLeading
+            containerTrailingConstraint?.isActive = false
+            containerLeadingConstraint?.isActive = true
         }
+        
+        bubble.message = message
+        text.text = message?.text
+        
+        if message?.text.isEmpty == true {
+            bubbleContainer.hideSubview(text, animated: false)
+        } else {
+            bubbleContainer.showSubview(text, animated: false)
+        }
+        
+        avatar.imageView.loadImage(from: message?.author.imageURL)
+        metada.message = message
+        
+        avatar.isVisible = message?.isLastInGroup == true
+        
+        if message?.isLastInGroup == false {
+            vStack.hideSubview(metada, animated: false)
+        } else {
+            vStack.showSubview(metada, animated: false)
+        }
+
+        if message?.attachments.isEmpty == false {
+            attachmentsView.content = .init(
+                attachments: message!.attachments.compactMap { $0 as? ChatMessageDefaultAttachment },
+                didTapOnAttachment: message!.didTapOnAttachment,
+                didTapOnAttachmentAction: message!.didTapOnAttachmentAction
+            )
+            
+            attachmentsView.widthAnchor.pin(equalTo: attachmentsView.heightAnchor, multiplier: 1).isActive = true
+//            bubbleContainer.spacing = 0
+            bubbleContainer.insertArrangedSubview(attachmentsView, at: 0, respectsLayoutMargins: false)
+
+            attachmentsView.widthAnchor.pin(equalTo: contentView.widthAnchor, multiplier: 1).with(priority: .defaultHigh)
+                .isActive = true
+
+            attachmentsView.setContentCompressionResistancePriority(.required, for: .horizontal)
+        }
+        
+        if message?.quotedMessageId != nil {
+            bubbleContainer.insertArrangedSubview(quotedMessageView!, at: 0)
+            quotedMessageView?.message = message?.quotedMessage
+            quotedMessageView?.isParentMessageSentByCurrentUser = message?.isSentByCurrentUser
+        }
+        
+        if message?.reactionScores.isEmpty == false {
+//            if reaction.superview == nil {
+//                container.addArrangedSubview(reaction)
+//            }
+            
+            reaction.text = message!.reactionScores.keys.first?.rawValue
+            
+//            if reactions.superview == nil {
+//                vStack.insertArrangedSubview(reactions, at: 0)
+//            }
+//
+//            let userReactionIDs = Set(message!.currentUserReactions.map(\.type))
+//
+//            let isOutgoing = message!.isSentByCurrentUser
+//
+//            reactions.content = .init(
+//                style: isOutgoing ? .smallOutgoing : .smallIncoming,
+//                reactions: message!.reactionScores.keys
+//                    .sorted { $0.rawValue < $1.rawValue }
+//                    .map { .init(type: $0, isChosenByCurrentUser: userReactionIDs.contains($0)) },
+//                didTapOnReaction: { _ in }
+//            )
+        } else {
+            if reaction.superview != nil {
+//                container.removeArrangedSubview(reaction)
+            }
+        }
+        
+//        if message?.reactionScores.isEmpty == false {
+//            if reactions.superview == nil {
+//                vStack.insertArrangedSubview(reactions, at: 0)
+//            } else if reactions.alpha == 0 {
+//                vStack.showSubview(reactions, animated: false)
+//            }
+//
+//            let userReactionIDs = Set(message!.currentUserReactions.map(\.type))
+//
+//            let isOutgoing = message!.isSentByCurrentUser
+//
+//            reactions.content = .init(
+//                style: isOutgoing ? .smallOutgoing : .smallIncoming,
+//                reactions: message!.reactionScores.keys
+//                    .sorted { $0.rawValue < $1.rawValue }
+//                    .map { .init(type: $0, isChosenByCurrentUser: userReactionIDs.contains($0)) },
+//                didTapOnReaction: { _ in }
+//            )
+//        } else {
+//            if reactions.superview != nil {
+//                vStack.hideSubview(reactions, animated: false)
+//            }
+//        }
+        
+//        messageView.message = message
+//
+//        switch message?.isSentByCurrentUser {
+//        case true?:
+//            assert(messageViewLeadingConstraint == nil, "The cell was already used for incoming message")
+//            if messageViewTrailingConstraint == nil {
+//                messageViewTrailingConstraint = messageView.trailingAnchor
+//                    .pin(equalTo: contentView.layoutMarginsGuide.trailingAnchor)
+//                messageViewTrailingConstraint!.isActive = true
+//            }
+//
+//        case false?:
+//            assert(messageViewTrailingConstraint == nil, "The cell was already used for outgoing message")
+//            if messageViewLeadingConstraint == nil {
+//                messageViewLeadingConstraint = messageView.leadingAnchor
+//                    .pin(equalTo: contentView.layoutMarginsGuide.leadingAnchor)
+//                messageViewLeadingConstraint!.isActive = true
+//            }
+//
+//        case nil:
+//            break
+//        }
     }
 
     // MARK: - Overrides
@@ -93,13 +258,15 @@ open class _СhatMessageCollectionViewCell<ExtraData: ExtraDataTypes>: _Collecti
         super.prepareForReuse()
 
         message = nil
+        
+//        outlineBorders()
     }
 
     override open func preferredLayoutAttributesFitting(
         _ layoutAttributes: UICollectionViewLayoutAttributes
     ) -> UICollectionViewLayoutAttributes {
         let preferredAttributes = super.preferredLayoutAttributesFitting(layoutAttributes)
-
+        
         let targetSize = CGSize(
             width: layoutAttributes.frame.width,
             height: UIView.layoutFittingCompressedSize.height
@@ -110,7 +277,7 @@ open class _СhatMessageCollectionViewCell<ExtraData: ExtraDataTypes>: _Collecti
             withHorizontalFittingPriority: .required,
             verticalFittingPriority: .fittingSizeLevel
         )
-
+        
         return preferredAttributes
     }
 }

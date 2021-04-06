@@ -106,6 +106,8 @@ open class _ChatChannelListItemView<ExtraData: ExtraDataTypes>: _View, UIConfigP
             return nil
         }
     }
+    
+    lazy var containerView = ContainerView().withoutAutoresizingMaskConstraints
 
     /// Layout properties of this view
     public private(set) var layout = Layout()
@@ -134,106 +136,128 @@ open class _ChatChannelListItemView<ExtraData: ExtraDataTypes>: _View, UIConfigP
 
     override open func setUpLayout() {
         super.setUpLayout()
+
+        addSubview(containerView)
+        containerView.pin(to: layoutMarginsGuide)
         
-        addSubview(titleLabel)
-        addSubview(subtitleLabel)
-        addSubview(timestampLabel)
-        addSubview(avatarView)
-        addSubview(unreadCountView)
-        
-        // A helper layout guide that helps to visually center views around the vertical center of the cell
-        // with defined vertical spacing
-        let visualCenterGuide = UILayoutGuide()
-        addLayoutGuide(visualCenterGuide)
-        
-        // Helper vertical center layout guide
-        NSLayoutConstraint.activate([
-            // Pin the center guide to the vertical center
-            visualCenterGuide.centerYAnchor.pin(equalTo: centerYAnchor),
-            
-            // Set its height to the current vertical margin to match the current spacing
-            visualCenterGuide.heightAnchor.pin(equalToConstant: layoutMargins.top)
-        ])
-        
-        // Avatar view
-        layout.avatarViewConstraints = [
-            // Default avatar view size
+        layout.avatarViewConstraints.append(contentsOf: [
             avatarView.heightAnchor.pin(equalToConstant: 48),
-            
-            // Pin size/width ratio to 1:1
-            avatarView.widthAnchor.pin(equalTo: avatarView.heightAnchor),
-            
-            // Align avatar to the left
-            avatarView.leadingAnchor.pin(equalTo: layoutMarginsGuide.leadingAnchor),
-            
-            // Always center the avatar vertically
-            avatarView.centerYAnchor.pin(equalTo: visualCenterGuide.centerYAnchor),
-            
-            // Avatar top and bottom should always be inside the cell
-            avatarView.topAnchor.pin(greaterThanOrEqualTo: layoutMarginsGuide.topAnchor),
-            avatarView.bottomAnchor.pin(lessThanOrEqualTo: layoutMarginsGuide.bottomAnchor)
-        ]
+            avatarView.widthAnchor.pin(equalTo: avatarView.heightAnchor)
+        ])
+        containerView.addArrangedSubview(avatarView)
         
-        // Title label
-        layout.titleLabelConstraints = [
-            // Bottom of the label is aligned with avatar vertical center
-            titleLabel.lastBaselineAnchor.pin(equalTo: visualCenterGuide.topAnchor),
+        let vContainer = ContainerView(axis: .vertical, views: [
+            ContainerView(views: [
+                titleLabel.flexible(axis: .horizontal), unreadCountView
+            ]).flexible(axis: .horizontal),
             
-            // Pin the title label leading anchor to avatar's trailing + spacing
-            titleLabel.leadingAnchor.pin(equalToSystemSpacingAfter: avatarView.trailingAnchor),
-            
-            // Title label top should always be inside the cell
-            titleLabel.topAnchor.pin(greaterThanOrEqualTo: layoutMarginsGuide.topAnchor)
-        ]
-
-        // Subtitle label
-        layout.subtitleLabelConstraints = [
-            // Top of the label is aligned with avatar vertical center
-            subtitleLabel.topAnchor.pin(equalTo: visualCenterGuide.bottomAnchor),
-            
-            // Pin the subtitle label leading anchor to avatar's trailing + spacing
-            subtitleLabel.leadingAnchor.pin(equalToSystemSpacingAfter: avatarView.trailingAnchor)
-        ]
-
-        // Unread count view
-        layout.unreadCountViewConstraints = [
-            // Pin the label to the trailing anchor
-            unreadCountView.trailingAnchor.pin(equalTo: layoutMarginsGuide.trailingAnchor),
-            
-            // Align it vertically with the title
-            unreadCountView.centerYAnchor.pin(equalTo: titleLabel.centerYAnchor),
-            
-            // Title label shouldn't overlap
-            unreadCountView.leadingAnchor.pin(greaterThanOrEqualToSystemSpacingAfter: titleLabel.trailingAnchor)
-        ]
-
-        // Set titleLabel compression resistance smaller than the unread count view
-        titleLabel.setContentCompressionResistancePriority(.streamLow, for: .horizontal)
-        unreadCountView.setContentCompressionResistancePriority(.streamRequire, for: .horizontal)
-
-        // Timestamp label
-        layout.timestampLabelConstraints = [
-            // Pin the label to the trailing anchor
-            timestampLabel.trailingAnchor.pin(equalTo: layoutMarginsGuide.trailingAnchor),
-            
-            // Align it vertically with the subtitle
-            timestampLabel.centerYAnchor.pin(equalTo: subtitleLabel.centerYAnchor),
-            
-            // Subtitle label shouldn't overlap
-            timestampLabel.leadingAnchor.pin(greaterThanOrEqualToSystemSpacingAfter: subtitleLabel.trailingAnchor)
-        ]
-
-        // Set subtitleLabel compression resistance smaller than the timestamp label
-        subtitleLabel.setContentCompressionResistancePriority(.streamLow, for: .horizontal)
-        timestampLabel.setContentCompressionResistancePriority(.streamRequire, for: .horizontal)
-
+            ContainerView(views: [
+                subtitleLabel.flexible(axis: .horizontal), timestampLabel
+            ]).flexible(axis: .horizontal)
+        ])
+        containerView.addArrangedSubview(vContainer)
+        
+//        addSubview(titleLabel)
+//        addSubview(subtitleLabel)
+//        addSubview(timestampLabel)
+//        addSubview(avatarView)
+//        addSubview(unreadCountView)
+//
+//        // A helper layout guide that helps to visually center views around the vertical center of the cell
+//        // with defined vertical spacing
+//        let visualCenterGuide = UILayoutGuide()
+//        addLayoutGuide(visualCenterGuide)
+//
+//        // Helper vertical center layout guide
+//        NSLayoutConstraint.activate([
+//            // Pin the center guide to the vertical center
+//            visualCenterGuide.centerYAnchor.pin(equalTo: centerYAnchor),
+//
+//            // Set its height to the current vertical margin to match the current spacing
+//            visualCenterGuide.heightAnchor.pin(equalToConstant: layoutMargins.top)
+//        ])
+//
+//        // Avatar view
+//        layout.avatarViewConstraints = [
+//            // Default avatar view size
+//            avatarView.heightAnchor.pin(equalToConstant: 48),
+//
+//            // Pin size/width ratio to 1:1
+//            avatarView.widthAnchor.pin(equalTo: avatarView.heightAnchor),
+//
+//            // Align avatar to the left
+//            avatarView.leadingAnchor.pin(equalTo: layoutMarginsGuide.leadingAnchor),
+//
+//            // Always center the avatar vertically
+//            avatarView.centerYAnchor.pin(equalTo: visualCenterGuide.centerYAnchor),
+//
+//            // Avatar top and bottom should always be inside the cell
+//            avatarView.topAnchor.pin(greaterThanOrEqualTo: layoutMarginsGuide.topAnchor),
+//            avatarView.bottomAnchor.pin(lessThanOrEqualTo: layoutMarginsGuide.bottomAnchor)
+//        ]
+//
+//        // Title label
+//        layout.titleLabelConstraints = [
+//            // Bottom of the label is aligned with avatar vertical center
+//            titleLabel.lastBaselineAnchor.pin(equalTo: visualCenterGuide.topAnchor),
+//
+//            // Pin the title label leading anchor to avatar's trailing + spacing
+//            titleLabel.leadingAnchor.pin(equalToSystemSpacingAfter: avatarView.trailingAnchor),
+//
+//            // Title label top should always be inside the cell
+//            titleLabel.topAnchor.pin(greaterThanOrEqualTo: layoutMarginsGuide.topAnchor)
+//        ]
+//
+//        // Subtitle label
+//        layout.subtitleLabelConstraints = [
+//            // Top of the label is aligned with avatar vertical center
+//            subtitleLabel.topAnchor.pin(equalTo: visualCenterGuide.bottomAnchor),
+//
+//            // Pin the subtitle label leading anchor to avatar's trailing + spacing
+//            subtitleLabel.leadingAnchor.pin(equalToSystemSpacingAfter: avatarView.trailingAnchor)
+//        ]
+//
+//        // Unread count view
+//        layout.unreadCountViewConstraints = [
+//            // Pin the label to the trailing anchor
+//            unreadCountView.trailingAnchor.pin(equalTo: layoutMarginsGuide.trailingAnchor),
+//
+//            // Align it vertically with the title
+//            unreadCountView.centerYAnchor.pin(equalTo: titleLabel.centerYAnchor),
+//
+//            // Title label shouldn't overlap
+//            unreadCountView.leadingAnchor.pin(greaterThanOrEqualToSystemSpacingAfter: titleLabel.trailingAnchor)
+//        ]
+//
+//        // Set titleLabel compression resistance smaller than the unread count view
+//        titleLabel.setContentCompressionResistancePriority(.streamLow, for: .horizontal)
+//        unreadCountView.setContentCompressionResistancePriority(.streamRequire, for: .horizontal)
+//
+//        // Timestamp label
+//        layout.timestampLabelConstraints = [
+//            // Pin the label to the trailing anchor
+//            timestampLabel.trailingAnchor.pin(equalTo: layoutMarginsGuide.trailingAnchor),
+//
+//            // Align it vertically with the subtitle
+//            timestampLabel.centerYAnchor.pin(equalTo: subtitleLabel.centerYAnchor),
+//
+//            // Subtitle label shouldn't overlap
+//            timestampLabel.leadingAnchor.pin(greaterThanOrEqualToSystemSpacingAfter: subtitleLabel.trailingAnchor)
+//        ]
+//
+//        // Set subtitleLabel compression resistance smaller than the timestamp label
+//        subtitleLabel.setContentCompressionResistancePriority(.streamLow, for: .horizontal)
+//        timestampLabel.setContentCompressionResistancePriority(.streamRequire, for: .horizontal)
+//
         NSLayoutConstraint.activate(
             layout.avatarViewConstraints
-                + layout.timestampLabelConstraints
-                + layout.titleLabelConstraints
-                + layout.subtitleLabelConstraints
-                + layout.unreadCountViewConstraints
+//                + layout.timestampLabelConstraints
+//                + layout.titleLabelConstraints
+//                + layout.subtitleLabelConstraints
+//                + layout.unreadCountViewConstraints
         )
+        
+        outlineBorders()
     }
     
     override open func updateContent() {
@@ -262,5 +286,13 @@ extension _ChatChannelListItemView {
         let typingPluralText = L10n.Channel.Item.typingPlural
 
         return names + " \(members.count == 1 ? typingSingularText : typingPluralText)"
+    }
+}
+
+extension UIView {
+    func outlineBorders() {
+        subviews.forEach { $0.outlineBorders() }
+        layer.borderWidth = 1
+        layer.borderColor = UIColor.green.withAlphaComponent(0.5).cgColor
     }
 }
