@@ -7,8 +7,6 @@ import StreamChat
 @testable import StreamChatUI
 import XCTest
 
-private typealias ChatMessageListTitleView = _ChatMessageListTitleView<NoExtraData>
-
 final class ChatMessageListTitleView_Tests: XCTestCase {
     func test_defaultAppearance() {
         let view = ChatMessageListTitleView().withoutAutoresizingMaskConstraints

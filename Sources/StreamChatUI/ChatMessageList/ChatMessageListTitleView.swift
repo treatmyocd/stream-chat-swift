@@ -5,6 +5,8 @@
 import StreamChat
 import UIKit
 
+public typealias ChatMessageListTitleView = _ChatMessageListTitleView<NoExtraData>
+
 /// A view that is used as a wrapper for status data in navigationItem's titleView
 open class _ChatMessageListTitleView<ExtraData: ExtraDataTypes>: _View, UIConfigProvider {
     /// Content of the view that contains title (first line) and subtitle (second nil)
@@ -22,6 +24,7 @@ open class _ChatMessageListTitleView<ExtraData: ExtraDataTypes>: _View, UIConfig
     
     /// A view that acts as the main container for the subviews
     open private(set) lazy var stackView: UIStackView = UIStackView()
+        .withoutAutoresizingMaskConstraints
     
     override public func defaultAppearance() {
         super.defaultAppearance()
@@ -42,7 +45,6 @@ open class _ChatMessageListTitleView<ExtraData: ExtraDataTypes>: _View, UIConfig
         stackView.addArrangedSubview(titleLabel)
         stackView.addArrangedSubview(subtitleLabel)
         addSubview(stackView)
-        stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.pin(to: self)
     }
     
