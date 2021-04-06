@@ -12,7 +12,8 @@ open class _ChatVC<ExtraData: ExtraDataTypes>: _ViewController,
     UIConfigProvider,
     _ChatMessageListVCDataSource,
     _ChatMessageListVCDelegate,
-    _ChatMessageComposerViewControllerDelegate {
+    _ChatMessageComposerViewControllerDelegate,
+    _ChatMessageListEventsDelegate {
     // MARK: - Properties
 
     public var channelController: _ChatChannelController<ExtraData>!
@@ -67,8 +68,10 @@ open class _ChatVC<ExtraData: ExtraDataTypes>: _ViewController,
         messageComposerViewController.controller = channelController
         messageComposerViewController.userSuggestionSearchController = userSuggestionSearchController
 
-        messageList.delegate = .wrap(self)
+        messageList.messageListActionsDelegate = .wrap(self)
         messageList.dataSource = .wrap(self)
+
+        messageList.messageListEventsDelegate = self
 
         userSuggestionSearchController.search(term: nil) // Initially, load all users
     }
@@ -169,5 +172,11 @@ open class _ChatVC<ExtraData: ExtraDataTypes>: _ViewController,
 
     public func messageComposerViewControllerDidSendMessage(_ vc: _ChatMessageComposerVC<ExtraData>) {
         messageList.setNeedsScrollToMostRecentMessage()
+    }
+
+    // MARK: ChatMessageListEventsDelegate
+
+    public func messageScrollViewDidScrollToBottom() {
+        print("Did scroll to bottom yoo")
     }
 }

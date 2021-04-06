@@ -31,11 +31,18 @@ public protocol _ChatMessageListVCDelegate: AnyObject {
     func chatMessageListVC(_ vc: _ChatMessageListVC<ExtraData>, didTapOnEdit message: _ChatMessage<ExtraData>)
 }
 
+/// Delegate which passes actions from `ChatMessageListVC`
+public protocol _ChatMessageListEventsDelegate: AnyObject {
+    /// Informs the delegate that message `scrollView` has scrolled to bottom.
+    func messageScrollViewDidScrollToBottom()
+}
+
 public typealias ChatMessageListVC = _ChatMessageListVC<NoExtraData>
 
 open class _ChatMessageListVC<ExtraData: ExtraDataTypes>: _ViewController,
     UICollectionViewDataSource,
     UICollectionViewDelegate,
+    UIScrollViewDelegate,
     UIConfigProvider,
     _ChatMessageActionsVCDelegate {
     public struct DataSource {
@@ -46,7 +53,7 @@ open class _ChatMessageListVC<ExtraData: ExtraDataTypes>: _ViewController,
         public var controllerForMessage: (_ChatMessageListVC, _ChatMessage<ExtraData>) -> _ChatMessageController<ExtraData>
     }
 
-    public struct Delegate {
+    public struct MessageListActionsDelegate {
         public var didSelectMessageAtIndex: ((_ChatMessageListVC, Int) -> Void)?
         public var didTapOnRepliesForMessage: ((_ChatMessageListVC, _ChatMessage<ExtraData>) -> Void)?
         public var didTapOnInlineReply: ((_ChatMessageListVC, _ChatMessage<ExtraData>) -> Void)?
@@ -54,7 +61,8 @@ open class _ChatMessageListVC<ExtraData: ExtraDataTypes>: _ViewController,
     }
 
     public var dataSource: DataSource = .empty()
-    public var delegate: Delegate?
+    public var messageListActionsDelegate: MessageListActionsDelegate?
+    public weak var messageListEventsDelegate: _ChatMessageListEventsDelegate?
 
     public lazy var impactFeedbackGenerator = UIImpactFeedbackGenerator(style: .medium)
 
@@ -222,7 +230,7 @@ open class _ChatMessageListVC<ExtraData: ExtraDataTypes>: _ViewController,
 
         cell.messageView.onThreadTap = { [weak self] in
             guard let self = self, let message = $0?.message else { return }
-            self.delegate?.didTapOnRepliesForMessage?(self, message)
+            self.messageListActionsDelegate?.didTapOnRepliesForMessage?(self, message)
         }
         cell.messageView.onErrorIndicatorTap = { [weak self, weak cell] _ in
             guard let self = self, let cell = cell else { return }
@@ -241,7 +249,7 @@ open class _ChatMessageListVC<ExtraData: ExtraDataTypes>: _ViewController,
     // MARK: - UICollectionViewDelegate
 
     public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        delegate?.didSelectMessageAtIndex?(self, indexPath.row)
+        messageListActionsDelegate?.didSelectMessageAtIndex?(self, indexPath.row)
     }
 
     public func collectionView(
@@ -262,7 +270,7 @@ open class _ChatMessageListVC<ExtraData: ExtraDataTypes>: _ViewController,
     ) {
         dismiss(animated: true) { [weak self] in
             guard let self = self else { return }
-            self.delegate?.didTapOnInlineReply?(self, message)
+            self.messageListActionsDelegate?.didTapOnInlineReply?(self, message)
         }
     }
 
@@ -279,12 +287,21 @@ open class _ChatMessageListVC<ExtraData: ExtraDataTypes>: _ViewController,
     ) {
         dismiss(animated: true) { [weak self] in
             guard let self = self else { return }
-            self.delegate?.didTapOnEdit?(self, message)
+            self.messageListActionsDelegate?.didTapOnEdit?(self, message)
         }
     }
 
     open func chatMessageActionsVCDidFinish(_ vc: _ChatMessageActionsVC<ExtraData>) {
         dismiss(animated: true)
+    }
+
+    // MARK: - UIScrollViewDelegate
+
+    // TODO: Obviously, the scroll is called multiple times. Maybe add here simply some flag?
+    public func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if (scrollView.contentOffset.y >= (scrollView.contentSize.height - scrollView.frame.size.height)) {
+            messageListEventsDelegate?.messageScrollViewDidScrollToBottom()
+        }
     }
 
     // MARK: - Private
@@ -437,9 +454,10 @@ public extension _ChatMessageListVC.DataSource {
     }
 }
 
-public extension _ChatMessageListVC.Delegate {
-    static func wrap<T: _ChatMessageListVCDelegate>(_ delegate: T) -> _ChatMessageListVC.Delegate where T.ExtraData == ExtraData {
-        _ChatMessageListVC.Delegate(
+public extension _ChatMessageListVC.MessageListActionsDelegate {
+    static func wrap<T: _ChatMessageListVCDelegate>(_ delegate: T) -> _ChatMessageListVC.MessageListActionsDelegate
+        where T.ExtraData == ExtraData {
+        _ChatMessageListVC.MessageListActionsDelegate(
             didSelectMessageAtIndex: { [weak delegate] in delegate?.chatMessageListVC($0, didSelectMessageAt: $1) },
             didTapOnRepliesForMessage: { [weak delegate] in delegate?.chatMessageListVC($0, didTapOnRepliesFor: $1) },
             didTapOnInlineReply: { [weak delegate] in delegate?.chatMessageListVC($0, didTapOnInlineReplyFor: $1) },
