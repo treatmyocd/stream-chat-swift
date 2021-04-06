@@ -212,7 +212,7 @@ extension _ChatChannel {
     public var isDeleted: Bool { deletedAt != nil }
     
     /// Checks if read events evadable for the current user.
-//    public var readEventsEnabled: Bool { /* config.readEventsEnabled && members.contains(Member.current) */ fatalError() }
+    public var readEventsEnabled: Bool { config.readEventsEnabled && membership != nil }
     
     /// Returns `true` when the channel is a direct-message channel.
     /// A "direct message" channel is created when client sends only the user id's for the channel and not an explicit `cid`,
