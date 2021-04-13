@@ -111,9 +111,8 @@ open class _ChatMessageComposerVC<ExtraData: ExtraDataTypes>: _ViewController,
             composerView.documentAttachmentsView.isHidden = true
             composerView.imageAttachmentsView.isHidden = true
             composerView.messageQuoteView.setAnimatedly(hidden: true)
-            composerView.container.topStackView.setAnimatedly(hidden: true)
+            composerView.topContainer.setAnimatedly(hidden: true)
             composerView.messageInputView.setSlashCommandViews(hidden: true)
-            composerView.invalidateIntrinsicContentSize()
         case let .slashCommand(command):
             textView.text = ""
             textView.placeholderLabel.text = command.name.firstUppercased
@@ -124,18 +123,18 @@ open class _ChatMessageComposerVC<ExtraData: ExtraDataTypes>: _ViewController,
             composerView.titleLabel.text = L10n.Composer.Title.reply
             let image = uiConfig.images.messageComposerReplyButton.tinted(with: uiConfig.colorPalette.inactiveTint)
             composerView.stateIcon.image = image
-            composerView.container.topStackView.setAnimatedly(hidden: false)
+            composerView.topContainer.setAnimatedly(hidden: false)
             composerView.messageQuoteView.setAnimatedly(hidden: false)
+            composerView.messageInputView.slashCommandView.isHidden = true
             composerView.messageQuoteView.content = .init(message: messageToQuote, avatarAlignment: .left)
-            composerView.invalidateIntrinsicContentSize()
         case let .edit(message):
             composerView.sendButton.mode = .edit
             composerView.titleLabel.text = L10n.Composer.Title.edit
             let image = uiConfig.images.messageComposerEditMessage.tinted(with: uiConfig.colorPalette.inactiveTint)
             composerView.stateIcon.image = image
-            composerView.container.topStackView.setAnimatedly(hidden: false)
+            composerView.topContainer.setAnimatedly(hidden: false)
+            composerView.messageInputView.slashCommandView.isHidden = true
             textView.text = message.text
-            composerView.invalidateIntrinsicContentSize()
         }
         
         if let memberCount = controller?.channel?.memberCount,
@@ -286,7 +285,8 @@ open class _ChatMessageComposerVC<ExtraData: ExtraDataTypes>: _ViewController,
     }
     
     func setInput(shrinked: Bool) {
-        for button in composerView.container.leftStackView.arrangedSubviews where button !== composerView.shrinkInputButton {
+        for button in composerView.leftContainer.subviews
+            where button !== composerView.shrinkInputButton {
             button.setAnimatedly(hidden: !shrinked)
         }
         composerView.shrinkInputButton.setAnimatedly(hidden: shrinked)
