@@ -52,7 +52,7 @@ open class _ChatMessageComposerView<ExtraData: ExtraDataTypes>: _View,
     public private(set) lazy var centerWrapperContainer = UIStackView()
         .withoutAutoresizingMaskConstraints
 
-    public private(set) lazy var centerContainer = UIStackView()
+    public private(set) lazy var centerContainer = ContainerStackView()
         .withoutAutoresizingMaskConstraints
 
     public private(set) lazy var leftContainer = UIStackView()
@@ -206,9 +206,9 @@ open class _ChatMessageComposerView<ExtraData: ExtraDataTypes>: _View,
         centerContainer.addArrangedSubview(imageAttachmentsView)
         centerContainer.addArrangedSubview(documentAttachmentsView)
         centerContainer.addArrangedSubview(messageInputView)
-        messageQuoteView.isHidden = true
-        imageAttachmentsView.isHidden = true
-        documentAttachmentsView.isHidden = true
+        centerContainer.hideSubview(messageQuoteView, animated: false)
+        centerContainer.hideSubview(imageAttachmentsView, animated: false)
+        centerContainer.hideSubview(documentAttachmentsView, animated: false)
         imageAttachmentsView.heightAnchor.pin(equalToConstant: 120).isActive = true
 
         rightContainer.alignment = .center

@@ -274,7 +274,7 @@ public class ContainerStackView: UIView {
     }
 
     func hideSubview(_ subview: UIView, animated: Bool = true) {
-        assert(subviews.contains(subview))
+        // assert(subviews.contains(subview))
 
         updateConstraintsIfNeeded()
 
@@ -285,7 +285,7 @@ public class ContainerStackView: UIView {
 
         Animate(isAnimated: animated) {
             subview.alpha = 0
-            self.hideConstraintsByView[subview]?.width.isActive = true
+            // self.hideConstraintsByView[subview]?.width.isActive = true
             self.hideConstraintsByView[subview]?.height.isActive = true
 
             self.spacingConstraintsByView[subview]?.setTemporaryConstant(0)

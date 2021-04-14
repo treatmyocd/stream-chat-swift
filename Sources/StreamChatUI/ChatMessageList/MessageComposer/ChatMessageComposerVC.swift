@@ -110,7 +110,7 @@ open class _ChatMessageComposerVC<ExtraData: ExtraDataTypes>: _ViewController,
             composerView.sendButton.mode = .new
             composerView.documentAttachmentsView.isHidden = true
             composerView.imageAttachmentsView.isHidden = true
-            composerView.messageQuoteView.setAnimatedly(hidden: true)
+            composerView.centerContainer.hideSubview(composerView.messageQuoteView)
             composerView.topContainer.setAnimatedly(hidden: true)
             composerView.messageInputView.setSlashCommandViews(hidden: true)
         case let .slashCommand(command):
@@ -124,7 +124,7 @@ open class _ChatMessageComposerVC<ExtraData: ExtraDataTypes>: _ViewController,
             let image = uiConfig.images.messageComposerReplyButton.tinted(with: uiConfig.colorPalette.inactiveTint)
             composerView.stateIcon.image = image
             composerView.topContainer.setAnimatedly(hidden: false)
-            composerView.messageQuoteView.setAnimatedly(hidden: false)
+            composerView.centerContainer.showSubview(composerView.messageQuoteView)
             composerView.messageInputView.slashCommandView.isHidden = true
             composerView.messageQuoteView.content = .init(message: messageToQuote, avatarAlignment: .left)
         case let .edit(message):
