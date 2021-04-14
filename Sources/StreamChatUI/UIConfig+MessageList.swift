@@ -12,6 +12,10 @@ public extension _UIConfig {
         public var defaultMessageCell: _СhatMessageCollectionViewCell<ExtraData>.Type =
             _СhatMessageCollectionViewCell<ExtraData>.self
 
+        /// A `UIView` subclass which serves as container for `typingIndicator` and `UILabel` describing who is currently typing
+        public var typingIndicatorOverlayView: _ChatMessageListTypingIndicatorView<ExtraData>.Type =
+            _ChatMessageListTypingIndicatorView<ExtraData>.self
+
         public var collectionView: ChatMessageListCollectionView.Type = ChatMessageListCollectionView.self
         public var collectionLayout: ChatMessageListCollectionViewLayout.Type = ChatMessageListCollectionViewLayout.self
         public var channelNamer: ChatChannelNamer<ExtraData> = DefaultChatChannelNamer()
