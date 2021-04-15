@@ -40,4 +40,13 @@ open class _ChatMessageListRouter<ExtraData: ExtraDataTypes>: ChatRouter<_ChatMe
         let navigation = UINavigationController(rootViewController: preview)
         rootViewController.present(navigation, animated: true)
     }
+    
+    open func showImageGallery(for message: _ChatMessage<ExtraData>) {
+        let imageGalleryVC = _ImageGalleryVC<ExtraData>()
+        imageGalleryVC.modalPresentationStyle = .overFullScreen
+        imageGalleryVC.content = message
+        
+        // TODO: Animated transition?
+        rootViewController.present(imageGalleryVC, animated: true)
+    }
 }

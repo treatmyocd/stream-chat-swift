@@ -405,7 +405,12 @@ open class _ChatMessageListVC<ExtraData: ExtraDataTypes>: _ViewController,
             let messageController = dataSource.controllerForMessage(self, message)
             messageController.restartFailedAttachmentUploading(with: id)
         default:
-            router.showPreview(for: attachment)
+            switch attachment.type {
+            case .audio, .file, .custom, .giphy, .link, .video:
+                router.showPreview(for: attachment)
+            case .image:
+                router.showImageGallery(for: message)
+            }
         }
     }
 
